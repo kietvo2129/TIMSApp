@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackGround">
+
+        <RelativeLayout
+            android:id="@+id/rl_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:padding="4dp">
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#1A237E"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="7"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:text="RD No"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/colorHeaderListView" />
+
+
+                            <TextView
+                                android:id="@+id/sd_num"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/selector_edittext"
+                                android:ellipsize="end"
+                                android:gravity="center|left"
+                                android:maxLines="1"
+                                android:padding="8dp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="#fff"
+                                android:textColorHint="@color/white" />
+
+
+                        </LinearLayout>
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:gravity="center"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_weight="3"-->
+<!--                            android:layout_height="wrap_content">-->
+
+<!--                            <LinearLayout-->
+<!--                                android:background="@drawable/box_view_layout"-->
+<!--                                android:id="@+id/abtn_rem"-->
+<!--                                android:gravity="center"-->
+<!--                                android:paddingHorizontal="8dp"-->
+<!--                                android:orientation="vertical"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content">-->
+<!--                                <TextView-->
+<!--                                    android:id="@+id/btn_rem"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_toStartOf="@+id/re_nub"-->
+
+<!--                                    android:text="Remaining"-->
+<!--                                    android:textColor="@color/white" />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/re_nub"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:text="0"-->
+<!--                                    android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textStyle="bold" />-->
+<!--                            </LinearLayout>-->
+<!--                        </LinearLayout>-->
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/label_mqr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="8dp"
+                            android:text="Bobbin No"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorHeaderListView" />
+
+                        <TextView
+                            android:id="@+id/edt_ea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/im_can"
+                            android:layout_alignBottom="@+id/im_can"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/im_can"
+                            android:background="@drawable/selector_edittext"
+                            android:ellipsize="end"
+                            android:gravity="center|left"
+                            android:hint="Bobbin No"
+                            android:maxLines="1"
+                            android:padding="8dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#fff"
+                            android:textColorHint="@color/white" />
+
+                        <ImageView
+                            android:id="@+id/im_can"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_below="@+id/label_mqr"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/im_me"
+                            android:background="@drawable/box_view_layout"
+                            android:padding="2dp"
+                            android:src="@drawable/qricon"
+                            android:tint="#fff" />
+
+                        <ImageView
+                            android:id="@+id/im_me"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_below="@+id/label_mqr"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/box_view_layout"
+                            android:padding="2dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/check_hard"
+                            android:tint="#fff" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_1"
+            android:layout_margin="4dp"
+            android:padding="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_res"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_rc_es" />
+        </RelativeLayout>
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_send"
+            app:backgroundTint="#004D40" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackGround">
+
+        <RelativeLayout
+            android:id="@+id/rl_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:padding="4dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#1A237E"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:text="EXT No"
+                            android:textColor="@color/colorHeaderListView" />
+
+                        <TextView
+                            android:id="@+id/tv_ext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_edittext"
+                            android:ellipsize="end"
+                            android:gravity="center|left"
+                            android:maxLines="1"
+                            android:padding="8dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/label_mqr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="8dp"
+                            android:text="Buyer QR"
+                            android:textColor="@color/colorHeaderListView" />
+
+                        <TextView
+                            android:id="@+id/tv_extqr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_below="@+id/label_mqr"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/im_ex_scan"
+                            android:background="@drawable/selector_edittext"
+                            android:ellipsize="end"
+                            android:gravity="center|left"
+                            android:hint="Qr code"
+                            android:maxLines="1"
+                            android:padding="8dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#fff"
+                            android:textColorHint="@color/white" />
+
+                        <ImageView
+                            android:id="@+id/im_ex_scan"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_below="@+id/label_mqr"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/im_ex_m"
+                            android:background="@drawable/box_view_layout"
+                            android:padding="2dp"
+                            android:src="@drawable/qricon"
+                            android:tint="#fff" />
+
+                        <ImageView
+                            android:id="@+id/im_ex_m"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_below="@+id/label_mqr"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/box_view_layout"
+                            android:padding="2dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/check_hard"
+                            android:textColor="@color/white"
+                            android:tint="#fff" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_1"
+            android:layout_margin="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ex_ts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aaa"
+                tools:listitem="@layout/item_ex_t" />
+        </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_ex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_send"
+            app:backgroundTint="#004D40" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

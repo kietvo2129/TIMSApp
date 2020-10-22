@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorbackgound">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/btclose"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@color/colorxam"
+            android:padding="4dp"
+            android:src="@drawable/ic_close"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@+id/btclose"
+            android:id="@+id/H1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="Quantity Divide"
+            android:textColorHint="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorTextAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/num_div"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:paddingVertical="16dp"
+                style="@style/textwhite"
+                android:paddingLeft="8dp"
+                android:textColor="#fff" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/H2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/H1"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:hint="Container Code"
+            android:textColorHint="#fff"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxStrokeColor="#fff"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@android:color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Containercode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:imeOptions="actionDone"
+                android:drawableRight="@drawable/ic_scan_qr"
+                android:inputType="text"
+                style="@style/textwhite"
+                android:paddingVertical="16dp"
+                android:paddingLeft="8dp"
+                android:textColor="#fff" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_marginBottom="8dp"
+            android:id="@+id/confirm"
+            style="@style/Widget.Shrine.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/H2"
+            android:layout_alignEnd="@+id/H2"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="0dp"
+            android:text="CONFIRM" />
+
+    </RelativeLayout>
+</RelativeLayout>

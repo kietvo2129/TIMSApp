@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginTop="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mt_cd"
+            style="@style/textwhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bgTitleLeft"
+            android:gravity="center"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="4dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/no"
+            style="@style/textwhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="131" />
+
+        <TextView
+            android:id="@+id/gr_qty"
+            style="@style/texthaitam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mt_cd"
+            android:layout_marginLeft="16dp"
+            android:text="Total" />
+
+        <TextView
+            android:id="@+id/gr_qtyreal"
+            style="@style/texthaitam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mt_cd"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="16dp"
+            android:text="QC" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/q1"
+            android:layout_below="@+id/mt_cd"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorxam" />
+
+
+        <TextView
+            android:id="@+id/num_gr_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gr_qty"
+            android:layout_marginLeft="16dp"
+            android:text="12.000"
+            android:textColor="@color/colorbackgound" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gr_qtyreal"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="16dp"
+            app:cardBackgroundColor="@color/colorbackgound">
+
+            <TextView
+                
+                android:id="@+id/qc_check"
+                style="@style/textwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="25.025" />
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/q1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/car"
+            android:layout_margin="4dp"
+            android:background="@color/colorxam" />
+
+        <LinearLayout
+            android:id="@+id/ln1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/q1"
+            android:weightSum="10">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="@color/bgTitleLeft">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/pass"
+                        android:background="@color/colorbackgound"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Pass"
+                        style="@style/textwhite"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/tvreturn"
+                        android:background="#4CAF50"
+                        style="@style/textwhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Return"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="3">
+
+                <ImageView
+                    android:id="@+id/title_from_to_dots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_below="@+id/code"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/from_to_purple" />
+
+                <TextView
+                    android:id="@+id/container"
+                    style="@style/texthaitam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/title_from_to_dots"
+                    android:layout_toEndOf="@+id/title_from_to_dots"
+                    android:layout_toRightOf="@+id/title_from_to_dots"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:paddingVertical="4dp"
+
+                    android:text="dashjdghdgd" />
+
+                <ImageView
+                    android:id="@+id/title_from_to_dots_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/container"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toEndOf="@+id/title_from_to_dots"
+                    android:layout_toRightOf="@+id/title_from_to_dots"
+                    android:src="@color/contentDividerLine" />
+
+                <TextView
+                    android:id="@+id/mt_no"
+                    style="@style/texthaitam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title_from_to_dots_divider"
+                    android:layout_toEndOf="@id/title_from_to_dots"
+                    android:layout_toRightOf="@id/title_from_to_dots"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="4dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

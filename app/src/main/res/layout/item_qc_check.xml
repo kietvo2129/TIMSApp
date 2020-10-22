@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorbackgound"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView_sub_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text=""
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/textView_sub_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/textView_food_2"
+            android:layout_toEndOf="@+id/textView_sub_1"
+            android:paddingVertical="8dp"
+            android:text="sub "
+            android:textColor="#fff" />
+
+        <CheckBox
+            android:id="@+id/checkboxCheckQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_sub_2"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="4dp"
+            android:buttonTint="#fff" />
+
+        <TextView
+            android:id="@+id/textView_food_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_sub_2"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/textView_food_2"
+            android:layout_toEndOf="@+id/checkboxCheckQ"
+            android:padding="8dp"
+            android:text="Content "
+            style="@style/textwhite" />
+
+        <TextView
+            android:id="@+id/textView_food_2"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/num_u_d"
+            android:background="@drawable/box_location_white"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:text=""
+            android:textColor="#fff" />
+
+        <LinearLayout
+            android:id="@+id/num_u_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imgButton_up"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_arrow_upward" />
+
+            <ImageButton
+                android:id="@+id/imgButton_down"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_arrow_downward" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

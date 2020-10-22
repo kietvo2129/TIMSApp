@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.timsapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/mms"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/mms"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.home.MappingOQC.QCCheckOQC.QCCheckOQCActivity"
+            android:parentActivityName=".ui.home.MappingOQC.MappingOQCActivity"/>
+        <activity
+            android:name=".ui.slideshow.shipk.TimsShipManualActivity"
+            android:parentActivityName=".ui.slideshow.shipk.TimsShipScanActivity" />
+        <activity
+            android:name=".ui.slideshow.shipk.TimsShipScanActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.slideshow.shipk.TimsShipManualActivity" />
+        <activity
+            android:name=".ui.gallery.receie.RecScanActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.gallery.receie.RecMaActivity" />
+        <activity
+            android:name=".ui.gallery.receie.RecMaActivity"
+            android:parentActivityName=".ui.gallery.receie.RecScanActivity" />
+        <activity
+            android:name=".ui.home.MappingOQC.MappingBuyerActivity"
+            android:parentActivityName=".ui.home.Composite.CompositeActivity" />
+        <activity
+            android:name=".ui.home.MappingOQC.MappingOQCActivity"
+            android:parentActivityName=".ui.home.Composite.CompositeActivity" />
+        <activity
+            android:name=".ui.home.Manufacturing.ManufacturingActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ui.home.Composite.Divide.DivDetailActivity"
+            android:parentActivityName=".ui.home.Composite.Divide.DivideActivity" />
+        <activity
+            android:name=".ui.home.Composite.Divide.DivideActivity"
+            android:parentActivityName=".ui.home.Composite.CompositeActivity" />
+        <activity
+            android:name=".ui.home.Mapping.QCcheck.QCCheckActivity"
+            android:parentActivityName=".ui.home.Mapping.MappingDetailActivity" />
+        <activity
+            android:name=".ui.home.Mapping.MappingDetailActivity"
+            android:parentActivityName=".ui.home.Mapping.MappingActivity" />
+        <activity
+            android:name=".ui.home.Mapping.MappingActivity"
+            android:parentActivityName=".ui.home.Composite.CompositeActivity" />
+        <activity
+            android:name=".ui.home.Composite.MachineActivity"
+            android:parentActivityName=".ui.home.Composite.CompositeActivity" />
+        <activity
+            android:name=".ui.home.Composite.WorkerActivity"
+            android:parentActivityName=".ui.home.Composite.CompositeActivity" />
+        <activity
+            android:name=".ui.home.Composite.AddmoldActivity"
+            android:parentActivityName=".ui.home.Composite.CompositeActivity" />
+        <activity
+            android:name=".ui.home.Composite.CompositeActivity"
+            android:parentActivityName=".ui.home.Manufacturing.ManufacturingActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppThemeNoActionBar">
+
+            <!--
+                android:name=".SplashActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
+    </application>
+
+</manifest>

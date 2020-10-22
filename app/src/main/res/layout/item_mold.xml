@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/colorxam"
+    app:cardCornerRadius="8dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingHorizontal="16dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/q1"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type: "
+            style="@style/texthaitam"/>
+        <TextView
+            android:layout_toEndOf="@+id/q1"
+            android:id="@+id/type"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ROT"
+            style="@style/texthaitam"/>
+        <TextView
+            android:id="@+id/q2"
+            android:layout_toStartOf="@+id/code"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code: "
+            style="@style/texthaitam"/>
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/code"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SX1-10R006"
+            style="@style/texthaitam"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/code"
+            android:text="MÁY 5K"/>
+        <TextView
+            android:id="@+id/q3"
+            android:layout_below="@+id/name"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purpose: "
+            style="@style/texthaitam"/>
+        <TextView
+            android:layout_toEndOf="@+id/q3"
+            android:layout_below="@+id/name"
+            android:id="@+id/purpose"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MULTI DIE CUTTING MACHINE"
+            style="@style/texthaitam"/>
+        <TextView
+            android:id="@+id/q4"
+            android:layout_below="@+id/purpose"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use: "
+            style="@style/texthaitam"/>
+        <TextView
+            android:layout_toEndOf="@+id/q4"
+            android:layout_below="@+id/purpose"
+            android:id="@+id/use"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unmapping"
+            style="@style/texthaitam"/>
+        <TextView
+            android:id="@+id/q5"
+            android:layout_below="@+id/use"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remark: "
+            style="@style/texthaitam"/>
+        <TextView
+            android:layout_toEndOf="@+id/q5"
+            android:layout_below="@+id/use"
+            android:id="@+id/remark"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHENZEN"
+            style="@style/texthaitam"/>
+        <androidx.cardview.widget.CardView
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/use"
+            app:cardCornerRadius="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/no"
+                style="@style/texthaitam"
+                android:paddingHorizontal="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"/>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

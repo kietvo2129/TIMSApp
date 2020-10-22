@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#01685F</color>
+    <color name="colorbackgound">#009688</color>
+    <color name="colorPrimaryDark">#282828</color>
+    <color name="colorAccent">#ff1b1b</color>
+    <color name="textcolorwhite">#ffffff</color>
+    <color name="textcolorblack">#282828</color>
+    <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
+
+    <color name="contentBadgeTitle">#a9a9a9</color>
+    <color name="titleBadgeTitle">#adafb1</color>
+    <color name="titleBadgeText">#adafb1</color>
+    <color name="mainTextColor">#343d43</color>
+    <color name="btnRequest">#ffbf12</color>
+    <color name="contentDividerLine">#e0e0e0</color>
+    <color name="bgContent">#ffffff</color>
+    <color name="bgBackSideColor">#f4f0ff</color>
+    <color name="bgTitleLeft">#594691</color>
+    <color name="bgTitleRight">#ffffff</color>
+    <color name="bgContentTop">#594691</color>
+    <color name="colorxam">#a9a9a9</color>
+    <color name="bgBottomNavigation">#fe485a</color>
+
+    <!--trieu-->
+    <color name="colorHeaderListView">#94F5FA</color>
+    <color name="colorBackGround">#1E4F78</color>
+    <color name="white">#ffffffff</color>
+
+
+</resources>
