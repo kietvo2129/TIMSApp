@@ -216,12 +216,14 @@ public class MappingOQCActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
 
-                Toast.makeText(MappingOQCActivity.this, "Chổ này Hằng chưa viết API nên đừng thử", Toast.LENGTH_SHORT).show();
-
-                numgr_qty = mappingMasterArrayList.get(position).gr_qty;
-                Ml_no = mappingMasterArrayList.get(position).mt_cd;
-                Intent intent = new Intent(MappingOQCActivity.this, QCCheckOQCActivity.class);
-                startActivity(intent);
+                if (mappingMasterArrayList.get(position).gr_qty == 0){
+                    AlerError.Baoloi("Number gr_qty = 0, please check again", MappingOQCActivity.this);
+                }else {
+                    numgr_qty = mappingMasterArrayList.get(position).gr_qty;
+                    Ml_no = mappingMasterArrayList.get(position).mt_cd;
+                    Intent intent = new Intent(MappingOQCActivity.this, QCCheckOQCActivity.class);
+                    startActivity(intent);
+                }
 
             }
 

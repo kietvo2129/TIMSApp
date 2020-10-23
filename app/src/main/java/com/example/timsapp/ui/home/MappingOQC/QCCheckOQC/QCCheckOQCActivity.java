@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -84,7 +85,7 @@ public class QCCheckOQCActivity extends AppCompatActivity {
         tv_qcheck_mlno.setText(MappingOQCActivity.Ml_no);
         tv_qcheck_date.setText(ManufacturingActivity.qc_code);
         tv_qcheck_checkqty.setText(numgr_qty + "");
-        new QCCheckOQCActivity.LoadCheckQc().execute(webUrl + "ActualWO/Popup_Qc_Check_API?item_vcd=" + ManufacturingActivity.qc_code);
+        new LoadCheckQc().execute(webUrl + "ActualWO/Popup_Qc_Check_API?item_vcd=" + ManufacturingActivity.qc_code);
         final int[] ck = {0};
         final int[] ok = {0};
         findViewById(R.id.header_p_2).setOnClickListener(new View.OnClickListener() {
@@ -198,7 +199,15 @@ public class QCCheckOQCActivity extends AppCompatActivity {
             }
         });
 
-
+        if(ManufacturingActivity.RollCode.equals("100")){
+            tv_qcheck_checkqty.setEnabled(true);
+            tv_qcheck_checkqty.setInputType(InputType.TYPE_CLASS_NUMBER);
+            tv_qcheck_checkqty.setFocusable(true);
+        }else {
+            tv_qcheck_checkqty.setEnabled(false);
+            tv_qcheck_checkqty.setInputType(InputType.TYPE_NULL);
+            tv_qcheck_checkqty.setFocusable(false);
+        }
     }
 
     private void pp_detail() {
@@ -224,8 +233,8 @@ public class QCCheckOQCActivity extends AppCompatActivity {
     }
 
     private void getdatadetail() {
-        new QCCheckOQCActivity.getdatadetail().execute(webUrl + "ActualWO/Getfacline_qc?mt_cd=" + MappingOQCActivity.Ml_no +"&item_vcd="+ManufacturingActivity.qc_code);
-        Log.e("QCCheckOQCDetail",webUrl + "ActualWO/Getfacline_qc?mt_cd=" + MappingOQCActivity.Ml_no +"&item_vcd="+ManufacturingActivity.qc_code);
+        new getdatadetail().execute(webUrl + "TIMS/Getfacline_oqc?mt_cd=" + MappingOQCActivity.Ml_no +"&item_vcd="+ManufacturingActivity.qc_code);
+        Log.e("QCCheckOQCDetail",webUrl + "TIMS/Getfacline_oqc?mt_cd=" + MappingOQCActivity.Ml_no +"&item_vcd="+ManufacturingActivity.qc_code);
     }
     class getdatadetail extends AsyncTask<String, Integer, String> {
 
@@ -257,8 +266,8 @@ public class QCCheckOQCActivity extends AppCompatActivity {
                 }
                 for (int i = 0 ;i<jsonArray.length();i++){
                     JSONObject jsonObject=jsonArray.getJSONObject(i);
-                    fqno = jsonObject.getString("fqno");
-                    fq_no = jsonObject.getString("fq_no");
+                    fqno = jsonObject.getString("pqno");
+                    fq_no = jsonObject.getString("pq_no");
                     work_dt = jsonObject.getString("work_dt");
                     check_qty = jsonObject.getString("check_qty");
                     ok_qty = jsonObject.getString("ok_qty");
@@ -296,7 +305,7 @@ public class QCCheckOQCActivity extends AppCompatActivity {
     }
 
     private void getDetailChild(int position) {
-        new QCCheckOQCActivity.getdatadetailChild().execute(webUrl + "ActualWO/Getfacline_qc_value?fq_no=" + qcCheckdetailMasters.get(position).getFq_no());
+        new getdatadetailChild().execute(webUrl + "TIMS/Getfacline_oqc_value?pq_no=" + qcCheckdetailMasters.get(position).getFq_no());
     }
     class getdatadetailChild extends AsyncTask<String, Integer, String> {
 
@@ -327,7 +336,7 @@ public class QCCheckOQCActivity extends AppCompatActivity {
                 }
                 for (int i = 0 ;i<jsonArray.length();i++){
                     JSONObject jsonObject=jsonArray.getJSONObject(i);
-                    fqhno = jsonObject.getString("fqhno");
+                    fqhno = jsonObject.getString("pqhno");
                     check_subject = jsonObject.getString("check_subject");
                     check_value = jsonObject.getString("check_value");
                     check_qty = jsonObject.getString("check_qty");
@@ -381,10 +390,22 @@ public class QCCheckOQCActivity extends AppCompatActivity {
                     dialog.dismiss();
                     Toast.makeText(QCCheckOQCActivity.this, "No data", Toast.LENGTH_SHORT).show();
                     rViewItemJSON.removeAll(rViewItemJSON);
+                    tv_qcheck_checkqty.setEnabled(false);
+                    tv_qcheck_checkqty.setInputType(InputType.TYPE_NULL);
+                    tv_qcheck_checkqty.setFocusable(false);
+                    tv_qcheck_okcheck.setEnabled(false);
+                    tv_qcheck_okcheck.setInputType(InputType.TYPE_NULL);
+                    tv_qcheck_okcheck.setFocusable(false);
                     return;
                 }
                 if (object.getString("result").equals("true") && object.getString("qc_itemcheck_mt").equals("[]")) {
                     Toast.makeText(QCCheckOQCActivity.this, "No data", Toast.LENGTH_SHORT).show();
+                    tv_qcheck_checkqty.setEnabled(false);
+                    tv_qcheck_checkqty.setInputType(InputType.TYPE_NULL);
+                    tv_qcheck_checkqty.setFocusable(false);
+                    tv_qcheck_okcheck.setEnabled(false);
+                    tv_qcheck_okcheck.setInputType(InputType.TYPE_NULL);
+                    tv_qcheck_okcheck.setFocusable(false);
                     dialog.dismiss();
                 }
 
@@ -600,11 +621,14 @@ public class QCCheckOQCActivity extends AppCompatActivity {
     private void savecheckQC() {
         String ITEM_ICDNO_S = "";
         String ITEM_CHECK_ERR_S = "";
+        int tong = 0;
 
         for (int i = 0; i < rViewItemJSON.size(); i++) {
             if (rViewItemJSON.get(i).isCheck()) {
                 ITEM_ICDNO_S = ITEM_ICDNO_S + "," + rViewItemJSON.get(i).getIcdno(); //qc_itemcheck_dt__icdno
                 ITEM_CHECK_ERR_S = ITEM_CHECK_ERR_S + "," + rViewItemJSON.get(i).getQty();// qty error input
+                tong+= Integer.parseInt(rViewItemJSON.get(i).getQty());
+
             }
         }
 
@@ -615,10 +639,11 @@ public class QCCheckOQCActivity extends AppCompatActivity {
 
             if (tv_qcheck_defectqty.getText().toString().trim().equals("0")) {
 
-                new QCCheckOQCActivity.saveQC().execute(webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+
+                new QCCheckOQCActivity.saveQC().execute(webUrl+"TIMS/Insert_w_product_oqc_APP?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
                         + "&check_qty_error="+ "" + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingOQCActivity.Ml_no);
 
-                Log.e("saveQC", webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+                Log.e("saveQC", webUrl+"TIMS/Insert_w_product_oqc_APP?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
                         + "&check_qty_error="+ "" + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingOQCActivity.Ml_no);
 
 
@@ -635,14 +660,19 @@ public class QCCheckOQCActivity extends AppCompatActivity {
                     }
 
                 }
+                if (Integer.parseInt(tv_qcheck_defectqty.getText().toString()) != tong){
+                    AlertNotExist("Please enter the total number of errors equal the amount of NG Qty.");
+                    return;
+                }
+
                 if (ITEM_ICDNO_S.length() > 1 && ITEM_CHECK_ERR_S.length() > 1) {
 
                     ITEM_ICDNO_S = ITEM_ICDNO_S.substring(1, ITEM_ICDNO_S.length());
                     ITEM_CHECK_ERR_S = ITEM_CHECK_ERR_S.substring(1, ITEM_CHECK_ERR_S.length());
 
-                    new QCCheckOQCActivity.saveQC().execute(webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+                    new QCCheckOQCActivity.saveQC().execute(webUrl+"TIMS/Insert_w_product_oqc_APP?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
                             + "&check_qty_error="+ ITEM_CHECK_ERR_S + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingOQCActivity.Ml_no);
-                    Log.e("saveQC", webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+                    Log.e("saveQC", webUrl+"TIMS/Insert_w_product_oqc_APP?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
                             + "&check_qty_error="+ ITEM_CHECK_ERR_S + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingOQCActivity.Ml_no);
 
                 } else {

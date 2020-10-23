@@ -146,7 +146,7 @@ public class MappingDetailAdapter extends RecyclerView.Adapter<MappingDetailAdap
 
         public void bindData(MappingDetailMaster note) {
 
-            if (ManufacturingActivity.RollCode.equals("200")){
+            if (!ManufacturingActivity.RollCode.equals("100")){
                 r.setVisibility(View.GONE);
             }else {
                 r.setVisibility(View.VISIBLE);

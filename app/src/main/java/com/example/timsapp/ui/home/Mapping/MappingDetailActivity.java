@@ -27,6 +27,7 @@ import com.example.timsapp.Url;
 import com.example.timsapp.ui.home.Composite.WorkerActivity;
 import com.example.timsapp.ui.home.Manufacturing.ManufacturingActivity;
 import com.example.timsapp.ui.home.Mapping.QCcheck.QCCheckActivity;
+import com.example.timsapp.ui.home.MappingOQC.QCCheckOQC.QCCheckOQCActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -398,10 +399,14 @@ public class MappingDetailActivity extends AppCompatActivity {
 
             @Override
             public void qcCheck(int position, TextView edittext) {
-                numgr_qty = mappingDetailMasterArrayList.get(position).gr_qty;
-                Ml_no = mappingDetailMasterArrayList.get(position).mt_cd;
-                Intent intent = new Intent(MappingDetailActivity.this, QCCheckActivity.class);
-                startActivity(intent);
+                if (mappingDetailMasterArrayList.get(position).gr_qty == 0){
+                    AlerError.Baoloi("Number gr_qty = 0, please check again", MappingDetailActivity.this);
+                }else {
+                    numgr_qty = mappingDetailMasterArrayList.get(position).gr_qty;
+                    Ml_no = mappingDetailMasterArrayList.get(position).mt_cd;
+                    Intent intent = new Intent(MappingDetailActivity.this, QCCheckActivity.class);
+                    startActivity(intent);
+                }
             }
 
             @Override

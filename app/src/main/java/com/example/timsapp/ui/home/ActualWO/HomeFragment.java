@@ -1,13 +1,19 @@
 package com.example.timsapp.ui.home.ActualWO;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +26,9 @@ import com.example.timsapp.Url;
 
 import com.example.timsapp.ui.home.Composite.ItemCompositeAdapter;
 import com.example.timsapp.ui.home.Manufacturing.ManufacturingActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 
 import org.json.JSONArray;
@@ -38,7 +47,7 @@ public class HomeFragment extends Fragment {
     private ProgressDialog dialog;
     ArrayList<ActualWOHomeMaster> actualWOMasterArrayList;
     ActualWOHomeAdapter actualWOHomeAdapter;
-
+    EditText Containercode;
     public static String at_no ="";
     public static String product ="";
 
@@ -48,9 +57,147 @@ public class HomeFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerView);
         dialog = new ProgressDialog(getContext(),R.style.AlertDialogCustom);
 
+        root.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_pp_create();
+            }
+        });
         getData(page);
         return root;
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void open_pp_create() {
+
+        final Dialog dialog = new Dialog(getContext(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.popup_create_first, null);
+        dialog.setCancelable(false);
+        dialog.setContentView(dialogView);
+        dialog.findViewById(R.id.btclose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+/// click drawable in TextInputEditText
+
+        Containercode = dialog.findViewById(R.id.Containercode);
+        Containercode.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (Containercode.getRight() - Containercode.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        openscan();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+/////
+        final EditText num_div = dialog.findViewById(R.id.num_div);
+        final Button confirm = dialog.findViewById(R.id.confirm);
+        final EditText remark = dialog.findViewById(R.id.remark);
+        final TextInputLayout h2;
+        final TextInputLayout h1;
+        final TextInputLayout h3;
+        h1 = dialog.findViewById(R.id.H1);
+        h2 = dialog.findViewById(R.id.H2);
+        h3 = dialog.findViewById(R.id.H3);
+
+
+
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (num_div.getText().toString() == null || num_div.getText().toString().length() == 0) {
+                    h2.setErrorEnabled(true);
+                    h1.setError(null);
+                    h3.setError(null);
+                    h2.setError("Please, Input here.");
+                    return;
+                } else if (Containercode.getText().toString() == null || Containercode.getText().toString().length() == 0) {
+
+                    h2.setError(null);
+                    h1.setErrorEnabled(true);
+                    h3.setError(null);
+                    h1.setError("Please, Input here.");
+                    return;
+                } else {
+                    h1.setError(null);
+                    h2.setError(null);
+                    h3.setError(null);
+                    new create().execute(webUrl+"TIMS/CreateTIMSActual?productCode=" + Containercode.getText().toString() +"&target="+num_div.getText().toString()
+                            +"&remark="+remark.getText().toString());
+                    Log.e("create",webUrl+"TIMS/CreateTIMSActual?productCode=" + Containercode.getText().toString() +"&target="+num_div.getText().toString()
+                            +"&remark="+remark.getText().toString());
+                    dialog.dismiss();
+                }
+
+
+            }
+        });
+
+
+        dialog.show();
+    }
+    private class create extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            return NoiDung_Tu_URL(strings[0]);
+        }
+        @Override
+        protected void onPreExecute() {
+            dialog.setMessage("Loading...");
+            dialog.setCancelable(true);
+            dialog.show();
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if (jsonObject.getBoolean("result")){
+                    Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
+                    getData(1);
+                }else {
+                    AlerError.Baoloi(jsonObject.getString("kq"), getContext());
+                }
+                dialog.dismiss();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                AlerError.Baoloi("Could not connect to server", getContext());
+                dialog.dismiss();
+            }
+        }
+
+    }
+
+    private void openscan() {
+        IntentIntegrator.forSupportFragment(this).initiateScan();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Containercode.setText(result.getContents());
+            }
+        }
+    }
+
     private void getData(int page) {
         new getData().execute(webUrl+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
         Log.e("getData",webUrl+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");

@@ -15,18 +15,17 @@
         android:weightSum="20"
         tools:context=".DMActivity">
 
+
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
+            android:layout_weight="3"
             android:gravity="center"
             android:text="TIMS"
             android:textColor="#fff"
             android:textSize="48sp" />
-
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -108,28 +107,21 @@
                 android:layout_marginEnd="0dp"
                 android:text="LOGIN"/>
 
-<!--            <MaterialButton-->
-<!--                android:id="@+id/btnsignup"-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_below="@+id/H2"-->
-<!--                android:layout_alignEnd="@+id/H2"-->
-<!--                android:layout_marginTop="4dp"-->
-<!--                android:layout_marginEnd="0dp"-->
+            <!--            <MaterialButton-->
+            <!--                android:id="@+id/btnsignup"-->
+            <!--                android:layout_width="100dp"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:layout_below="@+id/H2"-->
+            <!--                android:layout_alignEnd="@+id/H2"-->
+            <!--                android:layout_marginTop="4dp"-->
+            <!--                android:layout_marginEnd="0dp"-->
 
 
-<!--                android:text="LOGIN"-->
-<!--                android:textColor="#fff"-->
-<!--                android:textStyle="bold" />-->
+            <!--                android:text="LOGIN"-->
+            <!--                android:textColor="#fff"-->
+            <!--                android:textStyle="bold" />-->
         </RelativeLayout>
-
-
-
-
-
-
     </LinearLayout>
-
     <TextView
         android:id="@+id/version"
         android:layout_alignParentBottom="true"
@@ -143,6 +135,21 @@
         android:textSize="10sp">
 
     </TextView>
+
+    <TextView
+        android:id="@+id/tv_urlweb"
+        android:layout_width="wrap_content"
+        android:drawableRight="@drawable/ic_arrow"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:layout_marginRight="16dp"
+        android:layout_above="@+id/logo"
+        android:background="@drawable/box_location_white"
+        android:textColor="#fff"
+        android:paddingVertical="8dp" />
+
     <TextView
         android:id="@+id/logo"
         android:layout_alignParentBottom="true"

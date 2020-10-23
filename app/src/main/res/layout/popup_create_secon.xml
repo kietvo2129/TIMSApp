@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorbackgound">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/btclose"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@color/colorxam"
+            android:padding="4dp"
+            android:src="@drawable/ic_close"
+            android:layout_height="wrap_content" />
+
+
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/h1"
+            android:layout_below="@+id/btclose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_location_white">
+            <Spinner
+                android:backgroundTint="#fff"
+                android:id="@+id/ProcessName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:overlapAnchor="false" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/h2"
+            android:layout_below="@+id/h1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_location_white">
+            <Spinner
+                android:backgroundTint="#fff"
+                android:id="@+id/Roll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:overlapAnchor="false" />
+
+        </RelativeLayout>
+
+
+
+
+        <Button
+            android:layout_marginBottom="8dp"
+            android:id="@+id/confirm"
+            style="@style/Widget.Shrine.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/h2"
+            android:layout_alignEnd="@+id/h2"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="0dp"
+            android:text="CREATE" />
+
+    </RelativeLayout>
+</RelativeLayout>
