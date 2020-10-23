@@ -321,7 +321,7 @@ public class RecScanActivity extends AppCompatActivity {
                             ));
                         }
                         //re_nub.setText(jsonObject.getString("remain_qty"));
-                        Toast.makeText(RecScanActivity.this, jsonObject.has("message") ? jsonObject.getString("message") : "Error!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RecScanActivity.this, "Success !!!", Toast.LENGTH_SHORT).show();
                         buildRV();
                     }
                     progressDialog.dismiss();

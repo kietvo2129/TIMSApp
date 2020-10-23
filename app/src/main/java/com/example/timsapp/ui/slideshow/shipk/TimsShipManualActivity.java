@@ -168,6 +168,7 @@ public class TimsShipManualActivity extends AppCompatActivity {
             @Override
             public void onItemCheck(int position, boolean chek) {
                 listManualTims.get(position).setCheck(chek);
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -215,6 +216,8 @@ public class TimsShipManualActivity extends AppCompatActivity {
             }else {
                 waitViewHolder.clo.setCardBackgroundColor(Color.YELLOW);
             }
+
+            waitViewHolder.checkas.setChecked(currentItem.isCheck());
         }
 
         @Override
@@ -285,24 +288,23 @@ public class TimsShipManualActivity extends AppCompatActivity {
     }
 
     private void pick() {
-        Toast.makeText(this, "Triệu chưa sửa chổ này, bị lỗi check box, và xóa đi. bên dưới // lấy.", Toast.LENGTH_SHORT).show();
-
-//        String sa = "";
-//        for (int i = 0; i < listManualTims.size(); i++) {
-//            if (listManualTims.get(i).isCheck()) {
-//                sa += "," + listManualTims.get(i).getWmtid();
-//            }
-//        }
-//        if (sa.length() > 0) {
-//            //AlerError.Baoloi(sa, this);
-//            // run
-//            String url = Url.webUrl + "/TIMS/TimsShipping_Scan_M?data=" +
-//                    sa.substring(1, sa.length()) + "&ext_no=" + tv_ext.getText().toString().trim();
-//            pickJson(url);
-//            //Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
-//        } else {
-//            AlerError.Baoloi("Check row picking !!!", this);
-//        }
+        //Toast.makeText(this, "Triệu chưa sửa chổ này, bị lỗi check box, và xóa đi. bên dưới // lấy.", Toast.LENGTH_SHORT).show();
+        String sa = "";
+        for (int i = 0; i < listManualTims.size(); i++) {
+            if (listManualTims.get(i).isCheck()) {
+                sa += "," + listManualTims.get(i).getWmtid();
+            }
+        }
+        if (sa.length() > 0) {
+            //AlerError.Baoloi(sa, this);
+            // run
+            String url = Url.webUrl + "/TIMS/TimsShipping_Scan_M?data=" +
+                    sa.substring(1, sa.length()) + "&ext_no=" + tv_ext.getText().toString().trim();
+            pickJson(url);
+            //Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
+        } else {
+            AlerError.Baoloi("Check row picking !!!", this);
+        }
     }
 
     private void pickJson(String url) {
@@ -332,15 +334,17 @@ public class TimsShipManualActivity extends AppCompatActivity {
                             for (int j = 0; j < listManualTims.size(); j++) {
                                 if (wmtid.equals(listManualTims.get(j).getWmtid())) {
                                     listManualTims.get(j).setClo(true);
-                                    listManualTims.get(j).setSts_nm(object.getString("sts_nm"));
-                                    listManualTims.get(j).setSts_nm(object.getString("recevice_dt_tims"));
+                                    listManualTims.get(j).setSts_nm(object.getString("sts_nm")
+                                            .replace("]","")
+                                            .replace("[","")
+                                            .replace("\"",""));
+                                    listManualTims.get(j).setRecevice_dt_tims(object.getString("recevice_dt_tims").replace("]",""));
                                 }
                             }
                         }
                     }
-
-                    AlerError.Baoloi(jsonObject.getString("message"), TimsShipManualActivity.this);
                     buildRV();
+                    AlerError.Baoloi(jsonObject.getString("message"), TimsShipManualActivity.this);
 
                     new Handler().postDelayed(new Runnable() {
 
