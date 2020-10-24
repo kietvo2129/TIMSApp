@@ -78,7 +78,7 @@ public class QCCheckActivity extends AppCompatActivity {
         tv_qcheck_okcheck = findViewById(R.id.tv_qcheck_okcheck);
         tv_qcheck_defectqty = findViewById(R.id.tv_qcheck_defectqty);
         dialog = new ProgressDialog(QCCheckActivity.this, R.style.AlertDialogCustom);
-        tv_qcheck_mlno.setText(MappingActivity.Ml_no);
+        tv_qcheck_mlno.setText(MappingDetailActivity.Ml_no);
         tv_qcheck_date.setText(ManufacturingActivity.qc_code);
         tv_qcheck_checkqty.setText(numgr_qty + "");
         new LoadCheckQc().execute(webUrl + "ActualWO/Popup_Qc_Check_API?item_vcd=" + ManufacturingActivity.qc_code);
@@ -231,7 +231,9 @@ public class QCCheckActivity extends AppCompatActivity {
     }
 
     private void getdatadetail() {
-        new getdatadetail().execute(webUrl + "ActualWO/Getfacline_qc?mt_cd=" + MappingDetailActivity.Ml_no +"&item_vcd="+ManufacturingActivity.qc_code);
+        new getdatadetail().execute(webUrl + "TIMS/Getfacline_qc?mt_cd=" + MappingDetailActivity.Ml_no +"&item_vcd="+ManufacturingActivity.qc_code);
+        Log.e("getdatadetail",webUrl + "TIMS/Getfacline_qc?mt_cd=" + MappingDetailActivity.Ml_no +"&item_vcd="+ManufacturingActivity.qc_code);
+
     }
     class getdatadetail extends AsyncTask<String, Integer, String> {
 
@@ -303,6 +305,7 @@ public class QCCheckActivity extends AppCompatActivity {
 
     private void getDetailChild(int position) {
         new getdatadetailChild().execute(webUrl + "ActualWO/Getfacline_qc_value?fq_no=" + qcCheckdetailMasters.get(position).fq_no);
+        Log.e("getdatadetailChild",webUrl + "ActualWO/Getfacline_qc_value?fq_no=" + qcCheckdetailMasters.get(position).fq_no);
     }
     class getdatadetailChild extends AsyncTask<String, Integer, String> {
 
@@ -632,13 +635,15 @@ public class QCCheckActivity extends AppCompatActivity {
         } else {
 
 
+
             if (tv_qcheck_defectqty.getText().toString().trim().equals("0")) {
+                new saveQC().execute(webUrl+"TIMS/Insert_w_product_qc_APP?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+                        + "&check_qty_error="+ "" + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code
+                        + "&mt_cd="+MappingDetailActivity.Ml_no+ "&mt_lot=" + MappingActivity.Ml_no);
 
-                new saveQC().execute(webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
-                        + "&check_qty_error="+ "" + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingDetailActivity.Ml_no);
-
-                Log.e("saveQC", webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
-                        + "&check_qty_error="+ "" + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingDetailActivity.Ml_no);
+                Log.e("saveQC", webUrl+"TIMS/Insert_w_product_qc_APP?icdno=" + "" + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+                        + "&check_qty_error="+ "" + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code
+                        + "&mt_cd="+MappingDetailActivity.Ml_no + "&mt_lot=" + MappingActivity.Ml_no);
 
 
             } else if (tv_qcheck_defectqty.getText().toString().trim().length() > 0 &&
@@ -664,10 +669,12 @@ public class QCCheckActivity extends AppCompatActivity {
                     ITEM_ICDNO_S = ITEM_ICDNO_S.substring(1, ITEM_ICDNO_S.length());
                     ITEM_CHECK_ERR_S = ITEM_CHECK_ERR_S.substring(1, ITEM_CHECK_ERR_S.length());
 
-                    new saveQC().execute(webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
-                            + "&check_qty_error="+ ITEM_CHECK_ERR_S + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingDetailActivity.Ml_no);
-                    Log.e("saveQC", webUrl+"ActualWO/Insert_FaclineQc_API?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
-                            + "&check_qty_error="+ ITEM_CHECK_ERR_S + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code + "&mt_cd="+MappingDetailActivity.Ml_no);
+                    new saveQC().execute(webUrl+"TIMS/Insert_w_product_qc_APP?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+                            + "&check_qty_error="+ ITEM_CHECK_ERR_S + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code
+                            + "&mt_cd="+MappingDetailActivity.Ml_no+ "&mt_lot=" + MappingActivity.Ml_no);
+                    Log.e("saveQC", webUrl+"TIMS/Insert_w_product_qc_APP?icdno=" + ITEM_ICDNO_S + "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
+                            + "&check_qty_error="+ ITEM_CHECK_ERR_S + "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() + "&item_vcd="+ ManufacturingActivity.qc_code
+                            + "&mt_cd="+MappingDetailActivity.Ml_no+ "&mt_lot=" + MappingActivity.Ml_no);
 
                 } else {
                     AlertNotExist("Please choice qty item check !!!");

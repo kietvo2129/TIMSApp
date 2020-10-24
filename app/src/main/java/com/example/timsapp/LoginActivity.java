@@ -110,7 +110,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
+        userLoginEditText.setText("admin");
+        userFullNameEditText.setText("admin");
 
         userLoginEditText.addTextChangedListener(new TextWatcher() {
 

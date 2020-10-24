@@ -199,15 +199,7 @@ public class QCCheckOQCActivity extends AppCompatActivity {
             }
         });
 
-        if(ManufacturingActivity.RollCode.equals("100")){
-            tv_qcheck_checkqty.setEnabled(true);
-            tv_qcheck_checkqty.setInputType(InputType.TYPE_CLASS_NUMBER);
-            tv_qcheck_checkqty.setFocusable(true);
-        }else {
-            tv_qcheck_checkqty.setEnabled(false);
-            tv_qcheck_checkqty.setInputType(InputType.TYPE_NULL);
-            tv_qcheck_checkqty.setFocusable(false);
-        }
+
     }
 
     private void pp_detail() {
@@ -306,6 +298,7 @@ public class QCCheckOQCActivity extends AppCompatActivity {
 
     private void getDetailChild(int position) {
         new getdatadetailChild().execute(webUrl + "TIMS/Getfacline_oqc_value?pq_no=" + qcCheckdetailMasters.get(position).getFq_no());
+        Log.e("getdatadetailChild",webUrl + "TIMS/Getfacline_oqc_value?pq_no=" + qcCheckdetailMasters.get(position).getFq_no());
     }
     class getdatadetailChild extends AsyncTask<String, Integer, String> {
 
