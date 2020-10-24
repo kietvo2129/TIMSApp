@@ -725,8 +725,6 @@ public class QCCheckActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void AlertNotExist(String text) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setCancelable(false);
