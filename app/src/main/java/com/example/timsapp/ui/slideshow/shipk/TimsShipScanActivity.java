@@ -227,8 +227,14 @@ public class TimsShipScanActivity extends AppCompatActivity {
 
             @Override
             public void onDeleteClick(int position) {
-                listTimsScan.remove(position);
-                adapter.notifyItemRemoved(position);
+                String bye = listTimsScan.get(position).getBuyer_qr();
+                for(int i=0;i<listTimsScan.size();i++){
+                    if(bye.equals(listTimsScan.get(i).getBuyer_qr())){
+                        listTimsScan.remove(i);
+                        i--;
+                    }
+                }
+                adapter.notifyDataSetChanged();
             }
         });
     }

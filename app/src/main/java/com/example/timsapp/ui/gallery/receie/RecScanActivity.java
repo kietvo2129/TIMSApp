@@ -357,8 +357,15 @@ public class RecScanActivity extends AppCompatActivity {
 
             @Override
             public void onDeleteClick(int position) {
-                listRecW.remove(position);
-                adapter.notifyItemRemoved(position);
+                String Bb_no = listRecW.get(position).getBb_no().trim();
+                for (int i = 0; i < listRecW.size(); i++) {
+                    if (Bb_no.equals(listRecW.get(i).getBb_no())) {
+                        listRecW.remove(i);
+                        i--;
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
             }
         });
     }
