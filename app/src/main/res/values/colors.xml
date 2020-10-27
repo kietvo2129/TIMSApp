@@ -8,6 +8,10 @@
     <color name="textcolorblack">#282828</color>
     <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
 
+    <color name="color1">#000070</color>
+    <color name="color2">#4527a0</color>
+    <color name="color3">#7953d2</color>
+
     <color name="contentBadgeTitle">#a9a9a9</color>
     <color name="titleBadgeTitle">#adafb1</color>
     <color name="titleBadgeText">#adafb1</color>

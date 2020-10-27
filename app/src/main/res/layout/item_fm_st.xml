@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@android:color/holo_orange_light"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_row1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color1">
+
+            <TextView
+                android:id="@+id/tv_bb_no_fs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/tv_stt_st"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="DL154354"
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_stt_st"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:padding="4dp"
+                android:text="1"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_row2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_row1"
+            android:background="@color/color2">
+
+            <RelativeLayout
+                android:id="@+id/rl_row2_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/rl_row2_1"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:paddingHorizontal="8dp">
+
+                <TextView
+                    android:id="@+id/tv_qty_dt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="2500"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_row2_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/rl_row2_0">
+
+                <TextView
+                    android:id="@+id/lb_st_st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:padding="4dp"
+                    android:text="Status"
+                    android:textColor="#fff"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tv_st_st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/lb_st_st"
+                    android:padding="4dp"
+                    android:text="xuất hàng ngay 21/10"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lb_dep_st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_st_st"
+                    android:layout_alignParentStart="true"
+                    android:padding="4dp"
+                    android:text="Departure"
+                    android:textColor="#fff"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tv_dep_st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_st_st"
+                    android:layout_toEndOf="@+id/lb_dep_st"
+                    android:padding="4dp"
+                    android:text="CMT"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lb_mt_st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_dep_st"
+                    android:layout_alignParentStart="true"
+                    android:padding="4dp"
+                    android:text="Type"
+                    android:textColor="#fff"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tv_mt_st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_dep_st"
+                    android:layout_toEndOf="@+id/lb_mt_st"
+                    android:padding="4dp"
+                    android:text="CMT"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_row3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_row2"
+            android:background="@color/color3">
+
+            <TextView
+                android:id="@+id/lb_dt_st"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Recevice Date"
+                android:textColor="#fff"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_dt_st"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/lb_dt_st"
+                android:padding="4dp"
+                android:text="2200-11-11"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_row3">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chi_fg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:visibility="gone"
+                tools:listitem="@layout/item_chili" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

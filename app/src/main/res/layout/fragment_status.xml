@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackGround"
+
+   >
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cr"
+            app:cardCornerRadius="4dp"
+            app:cardBackgroundColor="@color/color1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="4dp"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/label_mlno_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="4dp"
+                    android:text="Container"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorHeaderListView" />
+
+                <TextView
+                    android:id="@+id/tv_qe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/label_mlno_status"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_toStartOf="@+id/imex"
+                    android:background="@drawable/selector_edittext"
+                    android:gravity="center|left"
+                    android:hint="Qr code"
+                    android:textColorHint="#fff"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="#FFF" />
+
+                <ImageView
+                    android:id="@+id/imex"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/label_mlno_status"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/qricon"
+                    app:tint="#fff" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_status"
+            android:layout_marginVertical="4dp"
+            android:layout_below="@+id/cr"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_fm_st"/>
+
+    </RelativeLayout>
+</FrameLayout>

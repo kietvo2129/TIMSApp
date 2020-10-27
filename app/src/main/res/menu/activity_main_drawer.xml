@@ -16,5 +16,9 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Shipping Scan" />
+        <item
+            android:id="@+id/nav_status"
+            android:icon="@drawable/ic_scan_qr"
+            android:title="Status" />
     </group>
 </menu>
