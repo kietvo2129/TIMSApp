@@ -81,10 +81,12 @@
             <TextView
                 android:id="@+id/num_gr_qtyreal"
                 style="@style/textwhite"
+                android:minWidth="40dp"
+                android:gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="25.025" />
+                android:text="0" />
         </androidx.cardview.widget.CardView>
 
         <View

@@ -1,10 +1,10 @@
 package com.example.timsapp.ui.home.ActualWO;
 
 public class ActualWOHomeMaster {
-    String id_actualpr,at_no,type,product,remark,style_nm;
+    String id_actualpr,at_no,type,product,remark,style_nm,reg_dt;
     int target;
 
-    public ActualWOHomeMaster(String id_actualpr, String at_no, String type, String product, String remark, String style_nm, int target) {
+    public ActualWOHomeMaster(String id_actualpr, String at_no, String type, String product, String remark, String style_nm, int target, String reg_dt) {
         this.id_actualpr = id_actualpr;
         this.at_no = at_no;
         this.type = type;
@@ -12,6 +12,15 @@ public class ActualWOHomeMaster {
         this.remark = remark;
         this.style_nm = style_nm;
         this.target = target;
+        this.reg_dt = reg_dt;
+    }
+
+    public String getReg_dt() {
+        return reg_dt;
+    }
+
+    public void setReg_dt(String reg_dt) {
+        this.reg_dt = reg_dt;
     }
 
     public String getId_actualpr() {

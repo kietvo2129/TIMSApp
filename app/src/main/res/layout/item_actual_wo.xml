@@ -15,15 +15,35 @@
         android:orientation="horizontal"
         android:weightSum="10">
 
-        <TextView
-            android:id="@+id/target"
-            style="@style/textwhite"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <RelativeLayout
             android:layout_weight="7"
             android:background="@color/bgTitleLeft"
-            android:gravity="center"
-            android:text="5.000" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/no"
+                android:layout_margin="4dp"
+                style="@style/textwhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/target"
+                style="@style/textwhite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date"
+                style="@style/textwhite"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:padding="4dp"/>
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

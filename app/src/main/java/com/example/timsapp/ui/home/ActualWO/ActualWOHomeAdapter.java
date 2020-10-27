@@ -57,7 +57,7 @@ public class ActualWOHomeAdapter extends RecyclerView.Adapter<ActualWOHomeAdapte
     }
     class NoteVH extends RecyclerView.ViewHolder {
 
-        public TextView target, atno, product;
+        public TextView target, atno, product,no,date;
 
         public NoteVH(View itemView, final ItemCompositeAdapter.OnItemClickListener listener) {
             super(itemView);
@@ -66,6 +66,8 @@ public class ActualWOHomeAdapter extends RecyclerView.Adapter<ActualWOHomeAdapte
             target = itemView.findViewById(R.id.target);
             atno = itemView.findViewById(R.id.atno);
             product = itemView.findViewById(R.id.product);
+            no = itemView.findViewById(R.id.no);
+            date= itemView.findViewById(R.id.date);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,6 +89,9 @@ public class ActualWOHomeAdapter extends RecyclerView.Adapter<ActualWOHomeAdapte
             target.setText(formatter.format(note.target));
             atno.setText(note.at_no);
             product.setText(note.product);
+            no.setText(getAdapterPosition()+1+"");
+            date.setText(note.reg_dt);
+
         }
 
         public void filterList(ArrayList<ActualWOHomeMaster> filteredList) {
