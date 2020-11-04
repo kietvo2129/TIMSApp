@@ -30,6 +30,10 @@
     <color name="colorHeaderListView">#94F5FA</color>
     <color name="colorBackGround">#1E4F78</color>
     <color name="white">#ffffffff</color>
+    <color name="sample_focused">#0D47A1</color>
+    <color name="sample_disabled_pressed">#01579B</color>
+    <color name="sample_disabled_not_pressed">#37383A</color>
+    <color name="sample_default">#6397E7</color>
 
 
 </resources>
