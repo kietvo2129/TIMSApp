@@ -65,6 +65,7 @@ public class CompositeActivity extends AppCompatActivity {
     ArrayList<VitridungmayMaster> vitridungmayMasterArrayList;
     TextView StaffType, StaffType_code;
     EditText tvid;
+    BoomMenuButton bmb4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,150 +80,8 @@ public class CompositeActivity extends AppCompatActivity {
         id_actual = ManufacturingActivity.id_actual;
         new getvitridungmay().execute(webUrl + "ActualWO/get_staff");
         //build bombutton
-        BoomMenuButton bmb4 = (BoomMenuButton) findViewById(R.id.bmb4);
+        bmb4 = (BoomMenuButton) findViewById(R.id.bmb4);
 
-
-        if (ManufacturingActivity.process_nm.equals("OQC")) {
-            bmb4.setPiecePlaceEnum(PiecePlaceEnum.HAM_3);
-            bmb4.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
-
-            bmb4.addBuilder(new HamButton.Builder()
-                    .normalImageRes(R.drawable.ic_staff)
-                    .normalTextRes(R.string.Worker)
-                    .subNormalTextRes(R.string.movingpositionofmachinery));
-
-            bmb4.addBuilder(new HamButton.Builder()
-                    .normalImageRes(R.drawable.ic_mapping)
-                    .normalTextRes(R.string.Mappiing)
-                    .subNormalTextRes(R.string.CompositeMaterialMapping));
-            bmb4.addBuilder(new HamButton.Builder()
-                    .normalImageRes(R.drawable.ic_div)
-                    .normalTextRes(R.string.MappingBuyer)
-                    .subNormalTextRes(R.string.MappingBuyerQRCode));
-            bmb4.setOnBoomListener(new OnBoomListener() {
-                @Override
-                public void onClicked(int index, BoomButton boomButton) {
-                    switch (index) {
-                        case 0:
-                            Intent intent = new Intent(CompositeActivity.this, WorkerActivity.class);
-                            startActivity(intent);
-                            break;
-                        case 1:
-                            Intent intent1 = new Intent(CompositeActivity.this, MappingOQCActivity.class);
-                            startActivity(intent1);
-                            break;
-                        case 2:
-                            Intent intent2 = new Intent(CompositeActivity.this, MappingBuyerActivity.class);
-                            startActivity(intent2);
-                            break;
-                    }
-
-                }
-
-                @Override
-                public void onBackgroundClick() {
-
-                }
-
-                @Override
-                public void onBoomWillHide() {
-
-                }
-
-                @Override
-                public void onBoomDidHide() {
-
-                }
-
-                @Override
-                public void onBoomWillShow() {
-
-                }
-
-                @Override
-                public void onBoomDidShow() {
-
-                }
-            });
-
-        } else {
-            if (ManufacturingActivity.RollCode.equals("300")) {
-                bmb4.setPiecePlaceEnum(PiecePlaceEnum.HAM_3);
-                bmb4.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
-
-                bmb4.addBuilder(new HamButton.Builder()
-                        .normalImageRes(R.drawable.ic_staff)
-                        .normalTextRes(R.string.Worker)
-                        .subNormalTextRes(R.string.movingpositionofmachinery));
-
-                bmb4.addBuilder(new HamButton.Builder()
-                        .normalImageRes(R.drawable.ic_mapping)
-                        .normalTextRes(R.string.Mappiing)
-                        .subNormalTextRes(R.string.CompositeMaterialMapping));
-                bmb4.addBuilder(new HamButton.Builder()
-                        .normalImageRes(R.drawable.ic_div)
-                        .normalTextRes(R.string.Divide)
-                        .subNormalTextRes(R.string.DivideMTNo));
-            } else {
-                bmb4.setPiecePlaceEnum(PiecePlaceEnum.HAM_2);
-                bmb4.setButtonPlaceEnum(ButtonPlaceEnum.HAM_2);
-
-                bmb4.addBuilder(new HamButton.Builder()
-                        .normalImageRes(R.drawable.ic_staff)
-                        .normalTextRes(R.string.Worker)
-                        .subNormalTextRes(R.string.movingpositionofmachinery));
-
-                bmb4.addBuilder(new HamButton.Builder()
-                        .normalImageRes(R.drawable.ic_mapping)
-                        .normalTextRes(R.string.Mappiing)
-                        .subNormalTextRes(R.string.CompositeMaterialMapping));
-            }
-            bmb4.setOnBoomListener(new OnBoomListener() {
-                @Override
-                public void onClicked(int index, BoomButton boomButton) {
-                    switch (index) {
-                        case 0:
-                            Intent intent = new Intent(CompositeActivity.this, WorkerActivity.class);
-                            startActivity(intent);
-                            break;
-                        case 1:
-                            Intent intent1 = new Intent(CompositeActivity.this, MappingActivity.class);
-                            startActivity(intent1);
-                            break;
-                        case 2:
-                            Intent intent2 = new Intent(CompositeActivity.this, DivideActivity.class);
-                            startActivity(intent2);
-                            break;
-                    }
-
-                }
-
-                @Override
-                public void onBackgroundClick() {
-
-                }
-
-                @Override
-                public void onBoomWillHide() {
-
-                }
-
-                @Override
-                public void onBoomDidHide() {
-
-                }
-
-                @Override
-                public void onBoomWillShow() {
-
-                }
-
-                @Override
-                public void onBoomDidShow() {
-
-                }
-            });
-        }
     }
 
     //        BoomMenuButton mapping = (BoomMenuButton) findViewById(R.id.mapping);
@@ -361,6 +220,7 @@ public class CompositeActivity extends AppCompatActivity {
                 if (jsonArray.length() == 0) {
                     dialog.dismiss();
                     nodata.setVisibility(View.VISIBLE);
+                    setmenuadd();
                     return;
                 }
 
@@ -383,6 +243,7 @@ public class CompositeActivity extends AppCompatActivity {
                 dialog.dismiss();
                 buildrecyc();
             } catch (JSONException e) {
+                setmenuadd();
                 e.printStackTrace();
                 nodata.setVisibility(View.VISIBLE);
                 AlerError.Baoloi("Could not connect to server", CompositeActivity.this);
@@ -392,9 +253,56 @@ public class CompositeActivity extends AppCompatActivity {
 
     }
 
+    private void setmenuadd() {
+        bmb4.clearBuilders();
+        bmb4.setPiecePlaceEnum(PiecePlaceEnum.HAM_1);
+        bmb4.setButtonPlaceEnum(ButtonPlaceEnum.HAM_1);
+        bmb4.addBuilder(new HamButton.Builder()
+                .normalImageRes(R.drawable.ic_staff)
+                .normalTextRes(R.string.Worker)
+                .subNormalTextRes(R.string.movingpositionofmachinery));
+        bmb4.setOnBoomListener(new OnBoomListener() {
+            @Override
+            public void onClicked(int index, BoomButton boomButton) {
+                switch (index) {
+                    case 0:
+                        Intent intent = new Intent(CompositeActivity.this, WorkerActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onBackgroundClick() {
+
+            }
+
+            @Override
+            public void onBoomWillHide() {
+
+            }
+
+            @Override
+            public void onBoomDidHide() {
+
+            }
+
+            @Override
+            public void onBoomWillShow() {
+
+            }
+
+            @Override
+            public void onBoomDidShow() {
+
+            }
+        });
+    }
+
     private void buildrecyc() {
         nodata.setVisibility(View.GONE);
-
+        setmenu();
         final LinearLayoutManager mLayoutManager;
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(CompositeActivity.this);
@@ -419,8 +327,8 @@ public class CompositeActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                        new onDelete().execute(webUrl + "ActualWO/DeleteMold_mc_wk_actual?id=" + compositeMasterArrayList.get(position).pmid + "&sts=wk");
-//                        Log.e("onDelete", webUrl + "ActualWO/DeleteMold_mc_wk_actual?id=" + compositeMasterArrayList.get(position).pmid + "&sts=wk");
+                        new onDelete().execute(webUrl + "ActualWO/DeleteMold_mc_wk_actual?id=" + compositeMasterArrayList.get(position).psid + "&sts=wk");
+                        Log.e("onDelete", webUrl + "ActualWO/DeleteMold_mc_wk_actual?id=" + compositeMasterArrayList.get(position).psid + "&sts=wk");
                     }
 
                 });
@@ -431,9 +339,236 @@ public class CompositeActivity extends AppCompatActivity {
                 });
                 alertDialog.show();
 
-
             }
         });
+    }
+
+    private class onDelete extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            return NoiDung_Tu_URL(strings[0]);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog.setMessage("Loading...");
+            dialog.setCancelable(true);
+            dialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                dialog.dismiss();
+                if (s.trim().indexOf("false")!=-1){
+                    AlerError.Baoloi("Delete false. Please check again.", CompositeActivity.this);
+                    return;
+                }
+                JSONObject jsonObject = new JSONObject(s);
+                if (jsonObject.getBoolean("result")) {
+                    dialog.dismiss();
+                    Toast.makeText(CompositeActivity.this, "Done", Toast.LENGTH_SHORT).show();
+                    startActivity(getIntent());
+                } else {
+                    dialog.dismiss();
+                    AlerError.Baoloi("Delete false. Please check again.", CompositeActivity.this);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                AlerError.Baoloi("Could not connect to server", CompositeActivity.this);
+                dialog.dismiss();
+            }
+        }
+
+    }
+
+    private void setmenu() {
+        bmb4.clearBuilders();
+        if (ManufacturingActivity.process_nm.equals("OQC")) {
+            bmb4.setPiecePlaceEnum(PiecePlaceEnum.HAM_3);
+            bmb4.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
+
+            bmb4.addBuilder(new HamButton.Builder()
+                    .normalImageRes(R.drawable.ic_staff)
+                    .normalTextRes(R.string.Worker)
+                    .subNormalTextRes(R.string.movingpositionofmachinery));
+
+            bmb4.addBuilder(new HamButton.Builder()
+                    .normalImageRes(R.drawable.ic_mapping)
+                    .normalTextRes(R.string.Mappiing)
+                    .subNormalTextRes(R.string.CompositeMaterialMapping));
+            bmb4.addBuilder(new HamButton.Builder()
+                    .normalImageRes(R.drawable.ic_div)
+                    .normalTextRes(R.string.MappingBuyer)
+                    .subNormalTextRes(R.string.MappingBuyerQRCode));
+            bmb4.setOnBoomListener(new OnBoomListener() {
+                @Override
+                public void onClicked(int index, BoomButton boomButton) {
+                    switch (index) {
+                        case 0:
+                            Intent intent = new Intent(CompositeActivity.this, WorkerActivity.class);
+                            startActivity(intent);
+                            break;
+                        case 1:
+                            Intent intent1 = new Intent(CompositeActivity.this, MappingOQCActivity.class);
+                            startActivity(intent1);
+                            break;
+                        case 2:
+                            Intent intent2 = new Intent(CompositeActivity.this, MappingBuyerActivity.class);
+                            startActivity(intent2);
+                            break;
+                    }
+
+                }
+
+                @Override
+                public void onBackgroundClick() {
+
+                }
+
+                @Override
+                public void onBoomWillHide() {
+
+                }
+
+                @Override
+                public void onBoomDidHide() {
+
+                }
+
+                @Override
+                public void onBoomWillShow() {
+
+                }
+
+                @Override
+                public void onBoomDidShow() {
+
+                }
+            });
+
+        } else {
+            if (ManufacturingActivity.RollCode.equals("300")) {
+                bmb4.setPiecePlaceEnum(PiecePlaceEnum.HAM_3);
+                bmb4.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
+
+                bmb4.addBuilder(new HamButton.Builder()
+                        .normalImageRes(R.drawable.ic_staff)
+                        .normalTextRes(R.string.Worker)
+                        .subNormalTextRes(R.string.movingpositionofmachinery));
+
+                bmb4.addBuilder(new HamButton.Builder()
+                        .normalImageRes(R.drawable.ic_mapping)
+                        .normalTextRes(R.string.Mappiing)
+                        .subNormalTextRes(R.string.CompositeMaterialMapping));
+                bmb4.addBuilder(new HamButton.Builder()
+                        .normalImageRes(R.drawable.ic_div)
+                        .normalTextRes(R.string.Divide)
+                        .subNormalTextRes(R.string.DivideMTNo));
+                bmb4.setOnBoomListener(new OnBoomListener() {
+                    @Override
+                    public void onClicked(int index, BoomButton boomButton) {
+                        switch (index) {
+                            case 0:
+                                Intent intent = new Intent(CompositeActivity.this, WorkerActivity.class);
+                                startActivity(intent);
+                                break;
+                            case 1:
+                                Intent intent1 = new Intent(CompositeActivity.this, MappingActivity.class);
+                                startActivity(intent1);
+                                break;
+                            case 2:
+                                Intent intent2 = new Intent(CompositeActivity.this, DivideActivity.class);
+                                startActivity(intent2);
+                                break;
+                        }
+
+                    }
+
+                    @Override
+                    public void onBackgroundClick() {
+
+                    }
+
+                    @Override
+                    public void onBoomWillHide() {
+
+                    }
+
+                    @Override
+                    public void onBoomDidHide() {
+
+                    }
+
+                    @Override
+                    public void onBoomWillShow() {
+
+                    }
+
+                    @Override
+                    public void onBoomDidShow() {
+
+                    }
+                });
+            } else {
+                bmb4.setPiecePlaceEnum(PiecePlaceEnum.HAM_2);
+                bmb4.setButtonPlaceEnum(ButtonPlaceEnum.HAM_2);
+
+                bmb4.addBuilder(new HamButton.Builder()
+                        .normalImageRes(R.drawable.ic_staff)
+                        .normalTextRes(R.string.Worker)
+                        .subNormalTextRes(R.string.movingpositionofmachinery));
+
+                bmb4.addBuilder(new HamButton.Builder()
+                        .normalImageRes(R.drawable.ic_mapping)
+                        .normalTextRes(R.string.Mappiing)
+                        .subNormalTextRes(R.string.CompositeMaterialMapping));
+                bmb4.setOnBoomListener(new OnBoomListener() {
+                    @Override
+                    public void onClicked(int index, BoomButton boomButton) {
+                        switch (index) {
+                            case 0:
+                                Intent intent = new Intent(CompositeActivity.this, WorkerActivity.class);
+                                startActivity(intent);
+                                break;
+                            case 1:
+                                Intent intent1 = new Intent(CompositeActivity.this, MappingActivity.class);
+                                startActivity(intent1);
+                                break;
+                        }
+
+                    }
+
+                    @Override
+                    public void onBackgroundClick() {
+
+                    }
+
+                    @Override
+                    public void onBoomWillHide() {
+
+                    }
+
+                    @Override
+                    public void onBoomDidHide() {
+
+                    }
+
+                    @Override
+                    public void onBoomWillShow() {
+
+                    }
+
+                    @Override
+                    public void onBoomDidShow() {
+
+                    }
+                });
+            }
+
+        }
+
     }
 
     //modify mc mold worker
