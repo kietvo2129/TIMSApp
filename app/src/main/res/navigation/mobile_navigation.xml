@@ -15,11 +15,17 @@
         android:id="@+id/nav_gallery"
         android:name="com.example.timsapp.ui.gallery.receie.Receive_Fragment"
         android:label="Receiving"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_receive" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.timsapp.ui.slideshow.shipk.ShipFragment"
         android:label="Shipping"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_ship" />
+
+    <fragment
+        android:id="@+id/nav_status"
+        android:name="com.example.timsapp.ui.status.StatusFragment"
+        android:label="Status"
+        tools:layout="@layout/fragment_status" />
 </navigation>
