@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -229,7 +230,7 @@ public class StatusFragment extends Fragment {
 
     private void sendData(String conText) {
         ID_MLNO = conText;
-        String url = Url.webUrl + "/Tims/Get_Status_Bobin?bb_no=" + conText;
+        String url = BaseApp.isHostting() + "/Tims/Get_Status_Bobin?bb_no=" + conText;
         loadJson(url, conText);
     }
 

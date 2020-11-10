@@ -33,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 import com.example.timsapp.ui.home.Manufacturing.ManufacturingActivity;
@@ -49,7 +50,7 @@ import java.util.List;
 import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 public class QCCheckActivity extends AppCompatActivity {
-    String webUrl = Url.webUrl;
+    String webUrl = BaseApp.isHostting();
     private RecyclerView recyclerViewCHECK;
     TextView tv_qcheck_mlno, tv_qcheck_date, tv_qcheck_defectqty;
     EditText tv_qcheck_checkqty, tv_qcheck_okcheck;

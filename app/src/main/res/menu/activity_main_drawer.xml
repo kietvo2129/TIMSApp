@@ -7,15 +7,15 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="Actual" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Receiving Scan" />
+            android:title="Receiving" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Shipping Scan" />
+            android:title="Shipping" />
         <item
             android:id="@+id/nav_status"
             android:icon="@drawable/ic_scan_qr"

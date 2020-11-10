@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_row1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color1">
+
+
+                <TextView
+                    android:id="@+id/tv_ml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toStartOf="@+id/tv_stt_fg"
+                    android:text="LJ63-10354ADD202010191"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/tv_stt_fg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="4dp"
+                    android:padding="4dp"
+                    android:text="1"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_row2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_row1"
+                android:background="@color/color2">
+
+                <RelativeLayout
+                    android:id="@+id/rl_row2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/rl_row2_0">
+                    <TextView
+                        android:id="@+id/lb_bb_noaa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:padding="4dp"
+                        android:text="Container"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/tv_add_con"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp"
+                        android:layout_toEndOf="@+id/lb_bb_noaa"
+                        android:padding="4dp"
+                        android:text="B0000547"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lb_bb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/tv_add_con"
+                        android:padding="4dp"
+                        android:text="MT No"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/tv_mtno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/tv_add_con"
+                        android:layout_marginEnd="4dp"
+                        android:layout_toEndOf="@+id/lb_bb"
+                        android:padding="4dp"
+                        android:text="B0000547"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_row3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_row2"
+                android:background="@color/color3"
+                android:padding="4dp">
+
+                <LinearLayout
+                    android:id="@+id/rl_row3_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/rl_e"
+                    android:layout_alignParentStart="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lb_dep_st"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Quantity Real"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/lb_rec_dt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Quantity"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rl_row3_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_row3_1"
+                    android:layout_toStartOf="@+id/rl_e"
+                    android:layout_alignParentStart="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_qty_r"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Receive"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_qty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="2020-10-21"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".BaseApp"
         android:allowBackup="true"
         android:icon="@drawable/tims"
         android:label="@string/app_name"
@@ -14,10 +15,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.home.MappingOQC.QCCheckOQC.QCCheckOQCActivity"
-            android:parentActivityName=".ui.home.MappingOQC.MappingOQCActivity"/>
+        <activity android:name=".ui.home.Manufacturing.Composite.QC.CheckEaActivity"
+            android:launchMode="singleTop"
+
+            android:parentActivityName=".ui.home.Manufacturing.Composite.CompositeCheckEAActivity" />
+        <activity
+            android:name=".ui.home.Manufacturing.Composite.ContainerInfoActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.home.Manufacturing.Composite.CompositeOqcActivity" />
+        <activity
+            android:name=".ui.home.Manufacturing.Composite.QC.CheckQCActivity"
+            android:launchMode="singleTop"
+
+            android:parentActivityName=".ui.home.Manufacturing.Composite.CompositeOqcActivity" />
+        <activity
+            android:name=".ui.home.Manufacturing.Composite.CompositeOqcActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.home.Manufacturing.Worker.WorkerAddJobActivity" />
+        <activity
+            android:name=".ui.home.Manufacturing.Composite.CompositeCheckEAActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.home.Manufacturing.Worker.WorkerAddJobActivity" />
+        <activity
+            android:name=".ui.home.Manufacturing.Worker.ListWorkerActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.home.Manufacturing.Worker.WorkerAddJobActivity" />
+        <activity
+            android:name=".ui.home.Manufacturing.Worker.WorkerAddJobActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.home.Manufacturing.ManufacturingActivity" />
+        <activity
+            android:name=".ui.home.MappingOQC.QCCheckOQC.QCCheckOQCActivity"
+            android:launchMode="singleTop"
+
+            android:parentActivityName=".ui.home.MappingOQC.MappingOQCActivity" />
         <activity
             android:name=".ui.slideshow.shipk.TimsShipManualActivity"
+            android:launchMode="singleTop"
+
             android:parentActivityName=".ui.slideshow.shipk.TimsShipScanActivity" />
         <activity
             android:name=".ui.slideshow.shipk.TimsShipScanActivity"
@@ -32,15 +67,21 @@
             android:parentActivityName=".ui.gallery.receie.RecScanActivity" />
         <activity
             android:name=".ui.home.MappingOQC.MappingBuyerActivity"
+            android:launchMode="singleTop"
+
             android:parentActivityName=".ui.home.Composite.CompositeActivity" />
         <activity
             android:name=".ui.home.MappingOQC.MappingOQCActivity"
+            android:launchMode="singleTop"
+
             android:parentActivityName=".ui.home.Composite.CompositeActivity" />
         <activity
             android:name=".ui.home.Manufacturing.ManufacturingActivity"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ui.home.Composite.Divide.DivDetailActivity"
+
             android:parentActivityName=".ui.home.Composite.Divide.DivideActivity" />
         <activity
             android:name=".ui.home.Composite.Divide.DivideActivity"
@@ -68,6 +109,7 @@
             android:parentActivityName=".ui.home.Manufacturing.ManufacturingActivity" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".LoginActivity"

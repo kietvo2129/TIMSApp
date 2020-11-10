@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SplashActivity extends AppCompatActivity {
-    String webUrl = Url.webUrl;
+    String webUrl = BaseApp.isHostting();
     private static final int SPLASH_DELAY = 1000;
     int versionCode = BuildConfig.VERSION_CODE;
     String versionName = BuildConfig.VERSION_NAME;

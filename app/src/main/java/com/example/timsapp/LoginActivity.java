@@ -34,7 +34,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import static com.example.timsapp.Url.webUrl;
+//import static com.example.timsapp.BaseApp.isHostting();
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -75,11 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         h1 = findViewById(R.id.H1);
         h2 = findViewById(R.id.H2);
         dialog = new ProgressDialog(this);
-
+        TextView tv = findViewById(R.id.logo);
+        //int i = 8/2*(2+2);
+        //tv.setText(String.valueOf(i));
         findViewById(R.id.logo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, webUrl, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, /*webUrl*/ BaseApp.isHostting(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -88,7 +90,10 @@ public class LoginActivity extends AppCompatActivity {
         version.setText("Version: " + versionName);
         sharedPreferences = getSharedPreferences("datalogin", MODE_PRIVATE);
         luu_Url = getSharedPreferences("dataUrl", MODE_PRIVATE);
-        webUrl = luu_Url.getString("url",ServerSSO);
+
+        //webUrl = luu_Url.getString("url",ServerSSO);
+
+        BaseApp.setHostting(luu_Url.getString("url",ServerSSO));
 
         String url = luu_Url.getString("url",ServerSSO);
         tv_urlweb = findViewById(R.id.tv_urlweb);
@@ -99,7 +104,6 @@ public class LoginActivity extends AppCompatActivity {
             tv_urlweb.setText("Offline");
 
         }
-
 
         tv_urlweb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,8 +170,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     h1.setError(null);
                     h2.setError(null);
-                    Log.d("Login",webUrl +"home/API_Login?" + "user=" + userFullNameEditText.getText().toString() + "&password=" + userLoginEditText.getText().toString()+"&type=MMS");
-                    new docJSON().execute(webUrl + "home/API_Login?" + "user=" + userFullNameEditText.getText().toString() + "&password=" + userLoginEditText.getText().toString()+"&type=MMS");
+                    String url = BaseApp.isHostting() + "home/API_Login?" + "user=" + userFullNameEditText.getText().toString() + "&password=" + userLoginEditText.getText().toString()+"&type=MMS";
+                    Log.d("Login",url);
+                    new docJSON().execute(url);
                 }
             }
         });
@@ -192,7 +197,8 @@ public class LoginActivity extends AppCompatActivity {
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                webUrl = arrayAdapterUrl.get(i);
+//                webUrl = arrayAdapterUrl.get(i);
+                BaseApp.setHostting(arrayAdapterUrl.get(i));
                 tv_urlweb.setText(arrayAdapter.getItem(i));
                 SharedPreferences.Editor editor = luu_Url.edit();
                 editor.putString("url",arrayAdapterUrl.get(i));

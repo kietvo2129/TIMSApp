@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -30,7 +31,7 @@ import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 
 public class MachineActivity extends AppCompatActivity {
-    String webUrl = Url.webUrl;
+    String webUrl = BaseApp.isHostting();
     String id_actual;
     private ProgressDialog dialog;
     ArrayList<ItemCompositeMaster> itemCompositeMasterArrayList;

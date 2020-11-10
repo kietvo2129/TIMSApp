@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 
@@ -43,7 +44,7 @@ import java.util.Locale;
 import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 public class HomeFragment extends Fragment {
-    String webUrl = Url.webUrl;
+
     RecyclerView recyclerView;
     int total=-1;
     int page =1;
@@ -138,9 +139,9 @@ public class HomeFragment extends Fragment {
                     h1.setError(null);
                     h2.setError(null);
                     h3.setError(null);
-                    new create().execute(webUrl+"TIMS/CreateTIMSActual?productCode=" + Containercode.getText().toString() +"&target="+num_div.getText().toString()
+                    new create().execute(BaseApp.isHostting()+"TIMS/CreateTIMSActual?productCode=" + Containercode.getText().toString() +"&target="+num_div.getText().toString()
                             +"&remark="+remark.getText().toString());
-                    Log.e("create",webUrl+"TIMS/CreateTIMSActual?productCode=" + Containercode.getText().toString() +"&target="+num_div.getText().toString()
+                    Log.e("create",BaseApp.isHostting()+"TIMS/CreateTIMSActual?productCode=" + Containercode.getText().toString() +"&target="+num_div.getText().toString()
                             +"&remark="+remark.getText().toString());
                     dialog.dismiss();
                 }
@@ -202,8 +203,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void getData(int page) {
-        new getData().execute(webUrl+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
-        Log.e("getData",webUrl+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
+        new getData().execute(BaseApp.isHostting()+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
+        Log.e("getData",BaseApp.isHostting()+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
     }
     private class getData extends AsyncTask<String, Void, String> {
         @Override
@@ -294,13 +295,14 @@ public class HomeFragment extends Fragment {
                 at_no = actualWOMasterArrayList.get(position).at_no;
                 product = actualWOMasterArrayList.get(position).product;
                 Intent intent = new Intent(getContext(), ManufacturingActivity.class);
+                intent.putExtra("PoNo",actualWOMasterArrayList.get(position).getAt_no());
                 startActivity(intent);
             }
         });
     }
     private void getaddData(int page) {
-        new getaddData().execute(webUrl+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
-        Log.e("getaddData",webUrl+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
+        new getaddData().execute(BaseApp.isHostting()+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
+        Log.e("getaddData",BaseApp.isHostting()+ "TIMS/Getdataw_actual_primary?rows=50&page="+ page+"&sidx=&sord=asc");
     }
 
     private class getaddData extends AsyncTask<String, Void, String> {

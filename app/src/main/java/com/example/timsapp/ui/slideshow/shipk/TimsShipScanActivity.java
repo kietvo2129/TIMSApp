@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 import com.example.timsapp.ui.gallery.receie.RecScanActivity;
@@ -147,7 +148,7 @@ public class TimsShipScanActivity extends AppCompatActivity {
             }
         }
         if (CodeData.length() != 0) {
-            String url = Url.webUrl + "/TIMS/GetTimsShippingScanMLQR?buyer_qr=" + CodeData;
+            String url = BaseApp.isHostting() + "/TIMS/GetTimsShippingScanMLQR?buyer_qr=" + CodeData;
             addJsonMaPic(url);
         }
     }
@@ -272,7 +273,7 @@ public class TimsShipScanActivity extends AppCompatActivity {
         }
 
         if (ai.length() > 0) {
-            String url = Url.webUrl + "/TIMS/UpdateMTQR_EXTList?data=" + ai.substring(1) + "&ext_no=" + tv_ext.getText().toString().trim();
+            String url = BaseApp.isHostting() + "/TIMS/UpdateMTQR_EXTList?data=" + ai.substring(1) + "&ext_no=" + tv_ext.getText().toString().trim();
             sendJSComlet(url);
         } else {
             AlerError.Baoloi("Don't have data !!!", TimsShipScanActivity.this);

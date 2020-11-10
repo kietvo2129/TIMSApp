@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 
@@ -84,7 +85,7 @@ public class TimsShipManualActivity extends AppCompatActivity {
     }
 
     private void serch() {
-        String url = Url.webUrl + "/TIMS/Get_List_Material_TimsShipping?page=1&rows=5000&sidx=&sord=asc&_search=false&buyer_qr=" +
+        String url = BaseApp.isHostting() + "/TIMS/Get_List_Material_TimsShipping?page=1&rows=5000&sidx=&sord=asc&_search=false&buyer_qr=" +
                 edt_by.getText().toString().trim() + "&mt_no=" +
                 edt_mt.getText().toString().trim() + "&mt_cd=" +
                 edt_ml.getText().toString().trim();
@@ -298,7 +299,7 @@ public class TimsShipManualActivity extends AppCompatActivity {
         if (sa.length() > 0) {
             //AlerError.Baoloi(sa, this);
             // run
-            String url = Url.webUrl + "/TIMS/TimsShipping_Scan_M?data=" +
+            String url = BaseApp.isHostting() + "/TIMS/TimsShipping_Scan_M?data=" +
                     sa.substring(1, sa.length()) + "&ext_no=" + tv_ext.getText().toString().trim();
             pickJson(url);
             //Toast.makeText(this, url, Toast.LENGTH_SHORT).show();

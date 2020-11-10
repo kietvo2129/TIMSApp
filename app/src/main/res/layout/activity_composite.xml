@@ -13,11 +13,13 @@
         android:layout_height="match_parent"
         android:text="No data available in table"
         android:gravity="center"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_composite"/>
+
     <com.nightonke.boommenu.BoomMenuButton
         android:id="@+id/bmb4"
         android:layout_width="wrap_content"

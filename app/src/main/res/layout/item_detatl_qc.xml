@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+
+    app:cardCornerRadius="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_row1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color1">
+
+                <TextView
+                    android:id="@+id/tv_con_ten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/tv_stt_fg"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="BBBB"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_stt_fg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="4dp"
+                    android:padding="4dp"
+                    android:text="1"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_row2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_row1"
+                android:background="@color/color2">
+
+                <RelativeLayout
+                    android:id="@+id/he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:id="@+id/tv_qty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="2020"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_row2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/he">
+
+                    <TextView
+                        android:id="@+id/lb_ml_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:padding="4dp"
+                        android:text="ML No"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/tv_mlno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp"
+                        android:layout_toEndOf="@+id/lb_bb_no"
+                        android:padding="4dp"
+                        android:text="B0000547"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/lb_bb_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_mlno"
+                        android:layout_alignParentStart="true"
+                        android:padding="4dp"
+                        android:text="MT No"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/tv_mtno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_mlno"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp"
+                        android:layout_toEndOf="@+id/lb_bb_no"
+                        android:padding="4dp"
+                        android:text="B0000547"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_row3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_row2"
+                android:background="@color/color3">
+
+                <LinearLayout
+                    android:id="@+id/rl_row3_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_toStartOf="@+id/addNG"
+                    android:layout_toEndOf="@+id/hie"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lb_rec_dt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="Check QC"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/tv_qc_check"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="2020"
+                        android:textColor="#004D40"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 import com.example.timsapp.ui.home.ActualWO.HomeFragment;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 public class MappingOQCActivity extends AppCompatActivity {
-    String webUrl = Url.webUrl;
+    String webUrl = BaseApp.isHostting();
     String id_actual = ManufacturingActivity.id_actual;
     int page = 1;
     private ProgressDialog dialog;
@@ -385,7 +386,6 @@ public class MappingOQCActivity extends AppCompatActivity {
                 id_actual +
                 "&bb_no=" +
                 contents);
-
     }
 
     private class creatingMLno extends AsyncTask<String, Void, String> {

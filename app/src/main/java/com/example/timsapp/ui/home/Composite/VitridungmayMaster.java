@@ -1,7 +1,7 @@
 package com.example.timsapp.ui.home.Composite;
 
 public class VitridungmayMaster {
-    String dt_cd,dt_nm;
+    String dt_cd, dt_nm;
 
     public VitridungmayMaster(String dt_cd, String dt_nm) {
         this.dt_cd = dt_cd;

@@ -1,6 +1,7 @@
 package com.example.timsapp.ui.gallery.receie;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,8 +13,11 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.LoginActivity;
 import com.example.timsapp.R;
 import com.example.timsapp.SplashActivity;
@@ -45,23 +50,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.example.timsapp.R.*;
 
 
 public class Receive_Fragment extends Fragment {
 
-    // private EditText edt_sd, edt_sm;
-    //private Button btn_serh;
     private RecyclerView recyclerViewListRecTims;
     private ProgressDialog progressDialog;
     private ArrayList<ListRecTims> listRecTims;
     private ListRecTimsAdaptor listRecTimsAdaptor;
     private ImageView im_can_bobbin;
     private TextView tv_bobbin_no;
-//    private ArrayList<ListRecS> listRecS;
-//    private ListRecSAdapter adapter;
+    private EditText edt_sr_po, edt_sr_product;
+    TextView edt_sr_receiving_date;
+    private Button btn_sr_each;
+    private RelativeLayout rl_arrow, rl_search;
+    private ImageView im_arrow;
+    private EditText edt_sr_container;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,19 +83,40 @@ public class Receive_Fragment extends Fragment {
         tv_bobbin_no = view.findViewById(id.tv_bobbin_no);
         im_can_bobbin = view.findViewById(id.im_can_bobbin);
 
-        //innit
-        //edt_sd = view.findViewById(R.id.edt_sd);
-        //edt_sm = view.findViewById(R.id.edt_sm);
-        // btn_serh = view.findViewById(R.id.btn_serh);
-        // rv_rc_d = view.findViewById(R.id.rv_rc_d);
-        //action
-//        Search();
-//        btn_serh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Search();
-//            }
-//        });
+        //init
+        edt_sr_po = view.findViewById(R.id.edt_sr_po);
+        edt_sr_product = view.findViewById(R.id.edt_sr_product);
+        edt_sr_receiving_date = view.findViewById(R.id.edt_sr_receiving_date);
+        btn_sr_each = view.findViewById(R.id.btn_sr_each);
+
+        rl_arrow = view.findViewById(R.id.rl_arrow);
+        im_arrow = view.findViewById(R.id.im_arrow);
+        rl_search = view.findViewById(R.id.rl_search);
+
+        edt_sr_container = view.findViewById(R.id.edt_sr_container);
+
+        rl_search.setVisibility(View.GONE);
+        im_arrow.setImageResource(drawable.ic_arrow);
+        rl_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                haha();
+            }
+        });
+
+        btn_sr_each.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadListRecTims();
+            }
+        });
+
+        edt_sr_receiving_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelectDate(edt_sr_receiving_date);
+            }
+        });
 
         tv_bobbin_no.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,14 +134,22 @@ public class Receive_Fragment extends Fragment {
         return view;
     }
 
+    private void haha() {
+        if(rl_search.getVisibility() == View.VISIBLE){
+            rl_search.setVisibility(View.GONE);
+            im_arrow.setImageResource(drawable.ic_arrow);
+
+        }else {
+            rl_search.setVisibility(View.VISIBLE);
+            im_arrow.setImageResource(drawable.ic_arrow_up);
+        }
+    }
+
     private void intext(final TextView tv) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.AlertDialogCustom));
         builder.setTitle("QR Code");
 
-        View viewInflated = this.getLayoutInflater().inflate(layout.text_input_layout, null,false);
-//        View viewInflated = LayoutInflater.from(TimsShipScanActivity.this).inflate(R.layout.text_input_layout, null, false);
-
-
+        View viewInflated = this.getLayoutInflater().inflate(layout.text_input_layout, null, false);
 //        LayoutInflater inflater = this.getLayoutInflater();
 //        View viewInflated = inflater.inflate(R.layout.text_input_layout, null);
 
@@ -167,12 +205,12 @@ public class Receive_Fragment extends Fragment {
     }
 
     private void sendData(String code) {
-        String url = Url.webUrl + "/TIMS/UpdateMTQR_RDList?bb_no=" + code;
+        String url = BaseApp.isHostting() + "/TIMS/UpdateMTQR_RDList?bb_no=" + code;
         updateJsonList(url);
     }
 //    private void Search() {
 //
-//        String url = Url.webUrl + "/TIMS/GetRDInfo?rd_no="
+//        String url = BaseApp.isHostting() + "/TIMS/GetRDInfo?rd_no="
 //                + edt_sd.getText().toString().trim() + "&rd_nm=" + edt_sm.getText().toString().trim();
 //        serJson(url);
 //    }
@@ -255,11 +293,40 @@ public class Receive_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadListRecTims();
-//        Search();
+
+    }
+
+    private void SelectDate(final TextView tv) {
+        final Calendar calendar = Calendar.getInstance();
+        int ngay = calendar.get(Calendar.DATE);
+        int thang = calendar.get(Calendar.MONTH);
+        int nam = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog picker = new DatePickerDialog(new ContextThemeWrapper(getActivity(), R.style.AlertDialogCustom), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                calendar.set(i, i1, i2);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                tv.setText(simpleDateFormat.format(calendar.getTime()));
+            }
+        }, nam, thang, ngay);
+
+        picker.setButton(DialogInterface.BUTTON_NEUTRAL, "none", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                tv.setText("");
+            }
+        });
+        picker.show();
     }
 
     private void loadListRecTims() {
-        String url = Url.webUrl + "/TIMS/Get_List_Material_TimsReceiving_PO?_search=false&rows=5000&page=1&sidx=&sord=asc";
+        String po = edt_sr_po.getText().toString().trim();
+        String pr = edt_sr_product.getText().toString().trim();
+        String dt = edt_sr_receiving_date.getText().toString().trim();
+        String cot = edt_sr_container.getText().toString().trim();
+        String url = BaseApp.isHostting() + "/TIMS/Get_List_Material_TimsReceiving_PO?po_no=" + po + "&product=" + pr + "&input_dt="+ dt +
+                "&bb_no=" + cot + "&_search=false&rows=5000&page=1&sidx=&sord=asc";
         loadJsonList(url);
     }
 
@@ -284,20 +351,19 @@ public class Receive_Fragment extends Fragment {
                         AlerError.Baoloi("Data don't have!!!", getActivity());
                     } else {
                         JSONObject object = jsonArray.getJSONObject(0);
+
                         boolean changColor = true;
                         final ListRecTims list = new ListRecTims(
                                 changColor,
                                 object.getString("wmtid"),
                                 object.getString("id_actual"),
                                 object.getString("mt_cd"),
-                                object.getString("mt_type"),
                                 object.getString("bb_no"),
                                 object.getString("gr_qty"),
-                                object.getString("recevice_dt_tims"),
-                                object.getString("from_lct_cd"),
-                                object.getString("lct_sts_cd"),
-                                object.getString("mt_sts_cd"),
+
                                 object.getString("input_dt"),
+                                object.getString("at_no"),
+                                object.getString("product"),
                                 object.getString("sts_nm"),
                                 object.getString("mt_type_nm"),
                                 object.getString("from_lct_nm")
@@ -306,9 +372,13 @@ public class Receive_Fragment extends Fragment {
                         for (int i = 0; i < listRecTims.size(); i++) {
                             if (list.getWmtid().equals(listRecTims.get(i).getWmtid())) {
                                 listRecTims.get(i).setColor(true);
+                                listRecTimsAdaptor.notifyDataSetChanged();
+
+                                recyclerViewListRecTims.scrollToPosition(i);
+                                break;
                             }
                         }
-                        listRecTimsAdaptor.notifyDataSetChanged();
+
 
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -321,7 +391,7 @@ public class Receive_Fragment extends Fragment {
                                 }
                                 listRecTimsAdaptor.notifyDataSetChanged();
                             }
-                        }, 3000);
+                        }, 2000);
                     }
 
                 } catch (JSONException e) {
@@ -355,7 +425,8 @@ public class Receive_Fragment extends Fragment {
                 Log.d("loadJsonList", response);
                 listRecTims = new ArrayList<ListRecTims>();
                 try {
-                    JSONArray jsonArray = new JSONArray(response);
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
 
                     if (jsonArray.length() == 0) {
                         AlerError.Baoloi("Data don't have!!!", getActivity());
@@ -369,14 +440,12 @@ public class Receive_Fragment extends Fragment {
                                     object.getString("wmtid"),
                                     object.getString("id_actual"),
                                     object.getString("mt_cd"),
-                                    object.getString("mt_type"),
                                     object.getString("bb_no"),
                                     object.getString("gr_qty"),
-                                    object.getString("recevice_dt_tims"),
-                                    object.getString("from_lct_cd"),
-                                    object.getString("lct_sts_cd"),
-                                    object.getString("mt_sts_cd"),
+
                                     object.getString("input_dt"),
+                                    object.getString("at_no"),
+                                    object.getString("product"),
                                     object.getString("sts_nm"),
                                     object.getString("mt_type_nm"),
                                     object.getString("from_lct_nm")
@@ -405,24 +474,20 @@ public class Receive_Fragment extends Fragment {
 
     private class ListRecTims {
         boolean color;
-        String wmtid, id_actual, mt_cd, mt_type, bb_no, gr_qty, recevice_dt_tims, from_lct_cd,
-                lct_sts_cd, mt_sts_cd, input_dt, sts_nm, mt_type_nm, from_lct_nm;
+        String wmtid, id_actual, mt_cd, bb_no, gr_qty, input_dt, at_no,
+                product, sts_nm, mt_type_nm, from_lct_nm;
 
-        public ListRecTims(boolean color, String wmtid, String id_actual, String mt_cd, String mt_type, String bb_no,
-                           String gr_qty, String recevice_dt_tims, String from_lct_cd, String lct_sts_cd,
-                           String mt_sts_cd, String input_dt, String sts_nm, String mt_type_nm, String from_lct_nm) {
+        public ListRecTims(boolean color, String wmtid, String id_actual, String mt_cd, String bb_no, String gr_qty,
+                           String input_dt, String at_no, String product, String sts_nm, String mt_type_nm, String from_lct_nm) {
             this.color = color;
             this.wmtid = wmtid;
             this.id_actual = id_actual;
             this.mt_cd = mt_cd;
-            this.mt_type = mt_type;
             this.bb_no = bb_no;
             this.gr_qty = gr_qty;
-            this.recevice_dt_tims = recevice_dt_tims;
-            this.from_lct_cd = from_lct_cd;
-            this.lct_sts_cd = lct_sts_cd;
-            this.mt_sts_cd = mt_sts_cd;
             this.input_dt = input_dt;
+            this.at_no = at_no;
+            this.product = product;
             this.sts_nm = sts_nm;
             this.mt_type_nm = mt_type_nm;
             this.from_lct_nm = from_lct_nm;
@@ -440,56 +505,88 @@ public class Receive_Fragment extends Fragment {
             return wmtid;
         }
 
+        public void setWmtid(String wmtid) {
+            this.wmtid = wmtid;
+        }
+
         public String getId_actual() {
             return id_actual;
+        }
+
+        public void setId_actual(String id_actual) {
+            this.id_actual = id_actual;
         }
 
         public String getMt_cd() {
             return mt_cd;
         }
 
-        public String getMt_type() {
-            return mt_type;
+        public void setMt_cd(String mt_cd) {
+            this.mt_cd = mt_cd;
         }
 
         public String getBb_no() {
             return bb_no;
         }
 
+        public void setBb_no(String bb_no) {
+            this.bb_no = bb_no;
+        }
+
         public String getGr_qty() {
             return gr_qty;
         }
 
-        public String getRecevice_dt_tims() {
-            return recevice_dt_tims;
-        }
-
-        public String getFrom_lct_cd() {
-            return from_lct_cd;
-        }
-
-        public String getLct_sts_cd() {
-            return lct_sts_cd;
-        }
-
-        public String getMt_sts_cd() {
-            return mt_sts_cd;
+        public void setGr_qty(String gr_qty) {
+            this.gr_qty = gr_qty;
         }
 
         public String getInput_dt() {
             return input_dt;
         }
 
+        public void setInput_dt(String input_dt) {
+            this.input_dt = input_dt;
+        }
+
+        public String getAt_no() {
+            return at_no;
+        }
+
+        public void setAt_no(String at_no) {
+            this.at_no = at_no;
+        }
+
+        public String getProduct() {
+            return product;
+        }
+
+        public void setProduct(String product) {
+            this.product = product;
+        }
+
         public String getSts_nm() {
             return sts_nm;
+        }
+
+        public void setSts_nm(String sts_nm) {
+            this.sts_nm = sts_nm;
         }
 
         public String getMt_type_nm() {
             return mt_type_nm;
         }
 
+        public void setMt_type_nm(String mt_type_nm) {
+            this.mt_type_nm = mt_type_nm;
+        }
+
         public String getFrom_lct_nm() {
             return from_lct_nm;
+        }
+
+        public void setFrom_lct_nm(String from_lct_nm) {
+            this.from_lct_nm = from_lct_nm;
         }
     }
 
@@ -524,11 +621,15 @@ public class Receive_Fragment extends Fragment {
                             + currentItem.getInput_dt().substring(6, 8)
                             : currentItem.getInput_dt());
 
-            if(currentItem.isColor()){
+            if (currentItem.isColor()) {
                 vh.card_item.setCardBackgroundColor(Color.GREEN);
-            }else{
+            } else {
                 vh.card_item.setCardBackgroundColor(color.colorbackgound);
             }
+
+            vh.tv_po_no.setText(currentItem.getAt_no());
+            vh.tv_product.setText(currentItem.getProduct());
+
         }
 
         @Override
@@ -554,6 +655,8 @@ public class Receive_Fragment extends Fragment {
             public TextView tv_depar;
             public TextView tv_rec_dt;
             public CardView card_item;
+            public TextView tv_po_no;
+            public TextView tv_product;
 
             public ListRecTimsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
                 super(itemView);
@@ -565,6 +668,9 @@ public class Receive_Fragment extends Fragment {
                 tv_ty_ty = itemView.findViewById(id.tv_ty_ty);
                 tv_depar = itemView.findViewById(id.tv_depar);
                 tv_rec_dt = itemView.findViewById(id.tv_rec_dt);
+                tv_po_no = itemView.findViewById(id.tv_po_no);
+                tv_product = itemView.findViewById(id.tv_product);
+
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

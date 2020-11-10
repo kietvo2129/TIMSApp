@@ -7,7 +7,7 @@ import java.net.URLConnection;
 
 public class Url {
 
-    public static String webUrl ;
+    //public static String webUrl ;
     public static String NoiDung_Tu_URL(String theUrl) {
         StringBuilder content = new StringBuilder();
         try {

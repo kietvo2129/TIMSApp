@@ -23,6 +23,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.ui.home.Composite.Divide.DivDetailActivity;
 import com.example.timsapp.ui.home.Composite.Divide.DivideActivity;
 
@@ -55,7 +56,7 @@ import java.util.Date;
 import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 public class CompositeActivity extends AppCompatActivity {
-    String webUrl = Url.webUrl;
+    String webUrl = BaseApp.isHostting();
     private ProgressDialog dialog;
     ArrayList<CompositeMaster> compositeMasterArrayList;
     TextView nodata;

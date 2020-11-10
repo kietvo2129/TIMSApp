@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/box_xam">
+    <!--    // heder-->
+    <RelativeLayout
+        android:id="@+id/rrr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_view_layout_nen">
+
+        <TextView
+            android:id="@+id/lbl_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@+id/img_close"
+            android:padding="4dp"
+            android:text="Add NG"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#FFF" />
+
+        <ImageView
+            android:id="@+id/img_close"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_close" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rrr">
+
+        <RelativeLayout
+            android:id="@+id/adng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rrl_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#1A237E"
+                app:cardCornerRadius="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/lll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="MT Lot"
+                                android:textColor="@color/colorHeaderListView" />
+
+                            <EditText
+                                android:id="@+id/tv_mlno"
+                                style="@style/textwhite"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/selector_edittext"
+                                android:inputType="textEmailAddress"
+                                android:padding="8dp" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/ld"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="MT No"
+                                android:textColor="@color/colorHeaderListView" />
+
+                            <EditText
+                                android:id="@+id/tv_mtno"
+                                style="@style/textwhite"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/ld"
+                                android:layout_marginEnd="8dp"
+                                android:layout_toStartOf="@+id/btn_searh"
+                                android:background="@drawable/selector_edittext"
+                                android:inputType="textEmailAddress"
+                                android:padding="8dp" />
+
+
+                            <Button
+                                android:id="@+id/btn_searh"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:text="Search"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/white" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rrl_a"
+                android:layout_marginTop="2dp"
+                app:cardBackgroundColor="#1A237E"
+                app:cardCornerRadius="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lll"
+                    android:orientation="vertical"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/as"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quantity NG"
+                        android:textColor="@color/colorHeaderListView" />
+
+                    <EditText
+                        android:id="@+id/qty_ng"
+                        style="@style/textwhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/as"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="0dp"
+                        android:inputType="number"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/btn_save"
+                        android:background="@drawable/selector_edittext"
+                        android:padding="8dp" />
+
+                    <Button
+                        android:id="@+id/btn_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="Save"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_below="@+id/adng"
+            android:id="@+id/nodatap"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="No data available in table" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_add_ng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adng"
+            android:layout_margin="4dp"
+            tools:listitem="@layout/item_add_ng" />
+    </RelativeLayout>
+
+</RelativeLayout>
+

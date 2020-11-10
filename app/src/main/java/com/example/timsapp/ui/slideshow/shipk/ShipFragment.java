@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 
@@ -119,7 +120,7 @@ public class ShipFragment extends Fragment {
     }
 
     private void Searcj() {
-        String url = Url.webUrl + "/TIMS/GetEXTInfo?ext_no="
+        String url = BaseApp.isHostting() + "/TIMS/GetEXTInfo?ext_no="
                 +tv_extno.getText().toString().trim()+"&ext_nm="+tv_extnm.getText().toString().trim();
 
         searchJson(url);
@@ -205,7 +206,7 @@ public class ShipFragment extends Fragment {
     private void makeRecyclerChil(int position, RecyclerView recyclerView) {
         listDetailChil = new ArrayList<>();
         rvViewChil = recyclerView;
-        String url = Url.webUrl + "/TIMS/GetTimsShippingScanListPP?ext_no=" + listTS.get(position).getExt_no();
+        String url = BaseApp.isHostting() + "/TIMS/GetTimsShippingScanListPP?ext_no=" + listTS.get(position).getExt_no();
         chilJson(url);
         buildRVdetailChil();
     }

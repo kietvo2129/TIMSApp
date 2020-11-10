@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:id="@+id/card_item"
     app:cardBackgroundColor="@color/colorbackgound"
     app:cardCornerRadius="8dp">
 
-<!--    app:cardBackgroundColor="@color/colorbackgound"-->
+    <!--    app:cardBackgroundColor="@color/colorbackgound"-->
 
     <LinearLayout
         style="@style/animationclick"
@@ -19,16 +19,18 @@
         android:padding="4dp">
 
         <TextView
-            android:layout_marginStart="4dp"
             android:id="@+id/tv_ml_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text="LJ63-19418ASTA20201103152043000001-DV5"
             android:textColor="@android:color/holo_orange_light" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorxam" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,10 +73,48 @@
 
 
                     <TextView
-                        android:textStyle="italic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bobbin No: " />
+                        android:text="PO No: "
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/tv_po_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PO00005" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product: "
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/tv_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="lalala lala" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Container: "
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/tv_bio_bi"
@@ -108,10 +148,10 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:textStyle="italic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Type: " />
+                        android:text="Type: "
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/tv_ty_ty"
@@ -141,10 +181,10 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="italic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Departure" />
+                    android:text="Departure"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/tv_depar"
@@ -152,10 +192,12 @@
                     android:layout_height="wrap_content"
                     android:text="Sản xuất 1" />
             </LinearLayout>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorxam" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -164,10 +206,10 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="italic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Receiving Date" />
+                    android:text="Receiving Date"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/tv_rec_dt"

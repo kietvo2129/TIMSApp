@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 
@@ -189,7 +190,7 @@ public class RecMaActivity extends AppCompatActivity {
         if (sa.length() > 0) {
             //AlerError.Baoloi(sa, this);
             // run
-            String url = Url.webUrl + "/TIMS/Receving_Scan_M?data="+
+            String url = BaseApp.isHostting() + "/TIMS/Receving_Scan_M?data="+
                     sa.substring(1,sa.length()) + "&rd_no="+ tex_sd.getText() ;
             pickJson(url);
         } else {
@@ -261,7 +262,7 @@ public class RecMaActivity extends AppCompatActivity {
 
     private void serch() {
 
-        String url = Url.webUrl + "/TIMS/Get_List_Material_TimsReceiving?mt_no=" +
+        String url = BaseApp.isHostting() + "/TIMS/Get_List_Material_TimsReceiving?mt_no=" +
                 edt_mt.getText().toString().trim() + "&mt_cd=" +
                 edt_ml.getText().toString().trim() + "&bb_no=" +
                 edt_bb.getText().toString().trim();

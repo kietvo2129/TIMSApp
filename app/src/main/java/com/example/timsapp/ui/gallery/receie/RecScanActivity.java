@@ -30,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -115,7 +116,7 @@ public class RecScanActivity extends AppCompatActivity {
         });
 
         // ati
-        String url = Url.webUrl + "/wipwms/Count_Remain_Qty?sd_no=" + SDNO;
+        String url = BaseApp.isHostting() + "/wipwms/Count_Remain_Qty?sd_no=" + SDNO;
 //        remaiJson(url);
         //http://192.168.100.53:81/wipwms/Count_Remain_Qty?sd_no=sd6
     }
@@ -127,7 +128,7 @@ public class RecScanActivity extends AppCompatActivity {
         }
 
         if (ai.length() > 0) {
-            String url = Url.webUrl + "/TIMS/UpdateMTQR_RDList?data=" + ai.substring(1) + "&rd_no=" + sd_num.getText().toString().trim();
+            String url = BaseApp.isHostting() + "/TIMS/UpdateMTQR_RDList?data=" + ai.substring(1) + "&rd_no=" + sd_num.getText().toString().trim();
             sendJSComlet(url);
         } else {
             AlerError.Baoloi("Don't have data !!!", RecScanActivity.this);
@@ -259,7 +260,7 @@ public class RecScanActivity extends AppCompatActivity {
 
     private void sendData(String cod) {
         // Toast.makeText(this, sd_num.getText().toString() +"......"+ cod, Toast.LENGTH_SHORT).show();
-        String url = Url.webUrl + "/TIMS/GetTimsReceiScanMLQR?bb_no=" + cod;
+        String url = BaseApp.isHostting() + "/TIMS/GetTimsReceiScanMLQR?bb_no=" + cod;
         //"http://192.168.100.53:81/wipwms/ScanML_no_ReceiWIP?ml_no=&sd_no="
         upJson(url);
     }

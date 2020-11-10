@@ -24,8 +24,6 @@ public class ItemStaffAdapter extends RecyclerView.Adapter<ItemStaffAdapter.Note
         mListener = listener;
     }
 
-
-
     public ItemStaffAdapter(List<ItemStaffMaster> noteList) {
         mNoteList = noteList;
     }
@@ -68,6 +66,7 @@ public class ItemStaffAdapter extends RecyclerView.Adapter<ItemStaffAdapter.Note
             mission = itemView.findViewById(R.id.mission);
             type = itemView.findViewById(R.id.type);
             Machine= itemView.findViewById(R.id.Machine);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

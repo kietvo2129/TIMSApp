@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.timsapp.AlerError.AlerError;
+import com.example.timsapp.BaseApp;
 import com.example.timsapp.R;
 import com.example.timsapp.Url;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,7 +46,7 @@ import java.util.Map;
 import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 public class WorkerActivity extends AppCompatActivity {
-    String webUrl = Url.webUrl;
+    String webUrl = BaseApp.isHostting();
     String id_actual;
     private ProgressDialog dialog;
     ArrayList<ItemStaffMaster> itemStaffMasterArrayList;
@@ -348,7 +349,9 @@ public class WorkerActivity extends AppCompatActivity {
             }
         });
         alertDialog.show();
+        alertDialog.show();
     }
+
     private void getVolley(String url, final String staff_tp, final String staff_id, final String use_yn, final String id_actual) {
         Log.e("volley",url+ "   "+staff_tp+"   "+staff_id+"   "+use_yn+"   "+id_actual);
         dialog.setMessage("Loading...");
