@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
     private String ServerSSL = "http://192.168.1.251:83/";
     SharedPreferences luu_Url;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

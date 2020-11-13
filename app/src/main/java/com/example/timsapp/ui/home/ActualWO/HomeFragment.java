@@ -296,6 +296,8 @@ public class HomeFragment extends Fragment {
                 product = actualWOMasterArrayList.get(position).product;
                 Intent intent = new Intent(getContext(), ManufacturingActivity.class);
                 intent.putExtra("PoNo",actualWOMasterArrayList.get(position).getAt_no());
+                intent.putExtra("Product",actualWOMasterArrayList.get(position).getProduct());
+
                 startActivity(intent);
             }
         });

@@ -221,7 +221,8 @@ public class ListWorkerActivity extends AppCompatActivity {
         itemStaffAdapter.setOnItemClickListener(new ItemStaffAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                chonvitri(position);
+                //chonvitri(position);
+                xacnhanadd(position,"","");
             }
         });
     }
@@ -260,7 +261,6 @@ public class ListWorkerActivity extends AppCompatActivity {
             return NoiDung_Tu_URL(strings[0]);
         }
 
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -285,7 +285,6 @@ public class ListWorkerActivity extends AppCompatActivity {
                 AlerError.Baoloi("Could not connect to server", ListWorkerActivity.this);
             }
         }
-
     }
 
     private void xacnhanadd(final int position /* lít úee*/, final String dt_cd, String name) {

@@ -20,5 +20,14 @@
             android:id="@+id/nav_status"
             android:icon="@drawable/ic_scan_qr"
             android:title="Status" />
+        <item
+            android:id="@+id/nav_buyqr"
+            android:icon="@drawable/ic_scan_qr"
+            android:title="Buyer QR" />
+
+        <item
+            android:id="@+id/nav_DownReason"
+            android:icon="@drawable/ic_scan_qr"
+            android:title="Down Reason" />
     </group>
 </menu>

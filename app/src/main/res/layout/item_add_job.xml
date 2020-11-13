@@ -1,241 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:layout_margin="4dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<!--    <LinearLayout-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv_item_id"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="52352"/>-->
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_item_name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="name"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv_item_actual"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="1000"/>-->
-<!--        <TextView-->
-<!--            android:id="@+id/tv_item_defective"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="0"/>-->
-<!--        <Button-->
-<!--            android:id="@+id/btn_item_Composite"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Composite"/>-->
-<!--    </LinearLayout>-->
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/rr1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/animationclick"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:background="@color/bgContent"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <!-- LEFT TITLE PART -->
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/rr1"
+            style="@style/animationclick"
             android:layout_width="match_parent"
-            android:layout_height="155dp"
-            android:layout_weight="3"
-            android:background="@color/bgTitleLeft"
-            android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:layout_height="wrap_content"
+            android:background="@color/bgContent"
+            android:baselineAligned="false"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:orientation="horizontal">
 
-            <TextView
-                android:textColor="#B71C1C"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/box_view_layout_nen"
-                android:padding="4dp"
-                android:layout_centerVertical="true"
-                android:text="Composite"
-                android:id="@+id/btn_item_Composite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:textColor="@android:color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/no"
-                android:layout_marginLeft="4dp"
-                android:text="1"/>
-            <TextView
-                android:layout_marginTop="20dp"
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/title_percent"
-                android:layout_width="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:textColor="@android:color/white"
-                android:textSize="10sp" />
-
-        </RelativeLayout>
-        <!-- RIGHT TITLE PART -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/bgTitleRight"
-            android:paddingBottom="20dp"
-            android:paddingEnd="20dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="20dp"
-            android:paddingStart="15dp">
-            <ImageView
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_delete"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/im_delete"/>
-
-            <ImageView
-                android:paddingTop="20dp"
-                android:id="@+id/title_from_to_dots"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/from_to_purple" />
-
-            <TextView
-                android:paddingTop="20dp"
-                android:id="@+id/product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/title_from_to_dots"
-                android:layout_marginTop="-5dp"
-                android:layout_toEndOf="@+id/title_from_to_dots"
-                android:layout_toRightOf="@+id/title_from_to_dots"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
-                android:textColor="#282828"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/title_from_to_dots_divider"
+            <!-- LEFT TITLE PART -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/product"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/title_from_to_dots"
-                android:layout_toRightOf="@+id/title_from_to_dots"
-                android:src="@color/contentDividerLine" />
+                android:layout_height="172dp"
+                android:layout_weight="3"
+                android:background="@color/bgTitleLeft"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
 
-            <TextView
-                android:id="@+id/item_vcd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title_from_to_dots_divider"
-                android:layout_toEndOf="@id/title_from_to_dots"
-                android:layout_toRightOf="@id/title_from_to_dots"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
-                android:textColor="#282828"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/btn_item_Composite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/box_view_layout_nen"
+                    android:padding="4dp"
+                    android:text="Composite"
+                    android:textColor="#B71C1C" />
+
+                <TextView
+                    android:id="@+id/no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="1"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/title_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+            <!-- RIGHT TITLE PART -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/bgTitleRight"
+                android:paddingStart="15dp"
+                android:paddingLeft="15dp"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/im_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_delete"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/title_from_to_dots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingTop="20dp"
+                    android:src="@drawable/from_to_purple" />
+
+                <TextView
+                    android:id="@+id/product"
+                    android:text="id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/title_from_to_dots"
+                    android:layout_marginTop="-5dp"
+                    android:layout_toEndOf="@+id/title_from_to_dots"
+                    android:layout_toRightOf="@+id/title_from_to_dots"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:paddingTop="20dp"
+                    android:textColor="#282828"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/title_from_to_dots_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/product"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toEndOf="@+id/title_from_to_dots"
+                    android:layout_toRightOf="@+id/title_from_to_dots"
+                    android:src="@color/contentDividerLine" />
+
+                <TextView
+                    android:text="ddd"
+                    android:id="@+id/item_vcd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title_from_to_dots_divider"
+                    android:layout_toEndOf="@id/title_from_to_dots"
+                    android:layout_toRightOf="@id/title_from_to_dots"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:textColor="#282828"
+                    android:textSize="16sp" />
+<!--                -->
+
+                <TextView
+                    android:id="@+id/tv_start_dt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_vcd"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_toEndOf="@+id/title_from_to_dots"
+                    android:text="2000-01-01" />
+
+                <TextView
+                    android:id="@+id/tv_end_dt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_start_dt"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_toEndOf="@+id/title_from_to_dots"
+
+                    android:text="2000-01-01" />
+<!--                -->
 
 
-            <TextView
-                android:id="@+id/target"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                <TextView
+                    android:id="@+id/target"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
 
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true" />
 
-            <TextView
-                android:visibility="gone"
-                style="@style/TitleBadgeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/target"
-                android:layout_alignLeft="@id/target"
-                android:layout_alignStart="@id/target"
-                android:text="Rool" />
+                <TextView
+                    style="@style/TitleBadgeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/target"
+                    android:layout_alignStart="@id/target"
+                    android:layout_alignLeft="@id/target"
+                    android:text="Rool"
+                    android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/defect"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                />
+                <TextView
+                    android:id="@+id/defect"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true" />
 
-            <TextView
-                style="@style/TitleBadgeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/defect"
-                android:layout_alignParentEnd="true"
-                android:text="Defective" />
-            <!--        android:layout_alignLeft="@id/title_weight"-->
-            <!--        android:layout_alignStart="@id/title_weight"-->
+                <TextView
+                    style="@style/TitleBadgeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/defect"
+                    android:layout_alignParentEnd="true"
+                    android:text="Defective" />
+                <!--        android:layout_alignLeft="@id/title_weight"-->
+                <!--        android:layout_alignStart="@id/title_weight"-->
 
-            <TextView
-                android:id="@+id/actual"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/actual"
+                    style="@style/TitleBadgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
 
-            <TextView
-                style="@style/TitleBadgeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/actual"
-                android:layout_centerHorizontal="true"
-                android:text="Actual" />
-            <!--        android:layout_alignLeft="@id/title_pledge"-->
-            <!--        android:layout_alignStart="@id/title_pledge"-->
+                <TextView
+                    style="@style/TitleBadgeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/actual"
+                    android:layout_centerHorizontal="true"
+                    android:text="Actual" />
+                <!--        android:layout_alignLeft="@id/title_pledge"-->
+                <!--        android:layout_alignStart="@id/title_pledge"-->
 
-        </RelativeLayout>
-    </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:visibility="gone"
-        android:id="@+id/re_de_add"
-        android:layout_below="@id/rr1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </LinearLayout>
 
-</RelativeLayout>
+        <ImageView
+            android:layout_margin="2dp"
+            android:id="@+id/edit_wr"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_view_layout_nen"
+            android:padding="4dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/re_de_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rr1"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardCornerRadius="8dp">
+
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,21 +22,20 @@
                 android:layout_height="wrap_content"
                 android:background="@color/color1">
 
-
                 <TextView
-                    android:id="@+id/tv_ml"
+                    android:id="@+id/tv_con_ten"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/tv_stt_fg"
-                    android:text="LJ63-10354ADD202010191"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="BBBB"
                     android:textColor="@android:color/holo_red_dark"
                     android:textStyle="bold" />
-
 
                 <TextView
                     android:id="@+id/tv_stt_fg"
@@ -58,45 +58,60 @@
                 android:background="@color/color2">
 
                 <RelativeLayout
+                    android:id="@+id/he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="1dp">
+
+                    <TextView
+                        android:id="@+id/tv_qty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="2020"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/rl_row2_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/rl_row2_0">
+                    android:layout_toEndOf="@+id/he">
+
                     <TextView
-                        android:id="@+id/lb_bb_noaa"
+                        android:id="@+id/lb_ml_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:padding="4dp"
-                        android:text="Container"
+                        android:text="ML No"
                         android:textColor="#fff"
                         android:textStyle="italic" />
 
                     <TextView
-                        android:id="@+id/tv_add_con"
+                        android:id="@+id/tv_mlno"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginEnd="4dp"
-                        android:layout_toStartOf="@+id/scan_div"
-                        android:layout_toEndOf="@+id/lb_bb_noaa"
+                        android:layout_toEndOf="@+id/lb_bb_no"
                         android:padding="4dp"
-                        android:gravity="right"
                         android:text="B0000547"
-                        android:textColor="#006064"
+                        android:textColor="#fff"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_alignParentEnd="true"
-                        android:id="@+id/scan_div"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_scan_qr"/>
+
                     <TextView
-                        android:id="@+id/lb_bb"
+                        android:id="@+id/lb_bb_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_mlno"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/tv_add_con"
                         android:padding="4dp"
                         android:text="MT No"
                         android:textColor="#fff"
@@ -106,10 +121,10 @@
                         android:id="@+id/tv_mtno"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_mlno"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@+id/tv_add_con"
                         android:layout_marginEnd="4dp"
-                        android:layout_toEndOf="@+id/lb_bb"
+                        android:layout_toEndOf="@+id/lb_bb_no"
                         android:padding="4dp"
                         android:text="B0000547"
                         android:textColor="#fff"
@@ -119,31 +134,43 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:padding="4dp"
                 android:id="@+id/rl_row3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_row2"
-                android:background="@color/color3"
-                android:padding="4dp">
+                android:background="@color/color3">
 
                 <LinearLayout
+
                     android:id="@+id/rl_row3_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/rl_e"
-                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_toStartOf="@+id/addNG"
+                    android:layout_toEndOf="@+id/hie"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/lb_dep_st"
-                        android:layout_width="0dp"
+                        android:id="@+id/btn_fish"
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:gravity="center"
+                        android:background="@drawable/box_view_layout_nen"
                         android:padding="4dp"
-                        android:text="Quantity Real"
-                        android:textColor="#fff"
-                        android:textStyle="italic" />
+                        android:textColor="#aaa"
+                        android:text="Finish" />
+
+                    <TextView
+                        android:id="@+id/btn_cacel"
+                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/box_view_layout_nen"
+                        android:textColor="#F57F17"
+
+                        android:padding="4dp"
+                        android:text="Cancel" />
 
                     <TextView
                         android:id="@+id/lb_rec_dt"
@@ -152,54 +179,23 @@
                         android:layout_weight="3"
                         android:gravity="center"
                         android:padding="4dp"
-                        android:text="Quantity"
+                        android:text="Check QC"
                         android:textColor="#fff"
                         android:textStyle="italic" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/rl_row3_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rl_row3_1"
-                    android:layout_toStartOf="@+id/rl_e"
-                    android:layout_alignParentStart="true"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:gravity="center"
-                        android:textColor="#fff"
-                        android:textStyle="bold" >
-                        <TextView
-                            android:layout_marginHorizontal="16dp"
-                            android:id="@+id/tv_qty_r"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="4dp"
-                            android:hint="0"
-                            android:background="@drawable/selector_edittext"
-                            android:textColor="#fff"
-                            android:textStyle="bold" />
-                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/tv_qty"
+                        android:id="@+id/tv_qc_check"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="center"
                         android:padding="4dp"
-                        android:text="2020-10-21"
-                        android:textColor="#fff"
+                        android:text="2020"
+                        android:textColor="#004D40"
                         android:textStyle="bold" />
                 </LinearLayout>
 
             </RelativeLayout>
-
 
         </RelativeLayout>
 

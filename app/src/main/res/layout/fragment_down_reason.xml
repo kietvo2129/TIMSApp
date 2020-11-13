@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/textcolorwhite">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.DownReason.DownReasonFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -71,47 +70,78 @@
                     android:layout_below="@+id/tv_qe"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="4dp"
-                    android:text="Buyer"
+                    android:text="Quantity"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorHeaderListView" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_qe_buy"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_below="@+id/label_buy_status"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="4dp"
-                    android:layout_toStartOf="@+id/imex"
                     android:background="@drawable/selector_edittext"
                     android:gravity="center|left"
-                    android:hint="Qr code"
+                    android:hint="Qty"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="#FFF"
                     android:textColorHint="#fff" />
 
-                <ImageView
-                    android:id="@+id/imex_buy"
-                    android:layout_width="45dp"
+                <TextView
+                    android:id="@+id/label_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_qe_buy"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="4dp"
+                    android:text="Reason"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorHeaderListView" />
+
+                <EditText
+                    android:id="@+id/edt_reason"
+                    android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_below="@+id/label_buy_status"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="4dp"
-                    android:src="@drawable/qricon"
-                    app:tint="#fff" />
+                    android:layout_below="@+id/label_reason"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/selector_edittext"
+                    android:gravity="center|left"
+                    android:hint="Reason"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="#FFF"
+                    android:textColorHint="#fff" />
+
+                <Button
+                    android:id="@+id/btn_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_reason"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:text="Change"
+                    android:textColor="#FFF"
+                    android:backgroundTint="#004D40"
+                    />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_status"
+            android:id="@+id/rv_buyer_qr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cr"
             android:layout_alignParentBottom="true"
             android:layout_marginVertical="4dp"
-            tools:listitem="@layout/item_fm_st" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp"
+            tools:listitem="@layout/item_buyer_qr" />
 
     </RelativeLayout>
+
 </FrameLayout>

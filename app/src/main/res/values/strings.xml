@@ -53,4 +53,6 @@
     <string name="DivideMTNo">Divide MT No</string>
     <string name="MappingBuyer">Mapping Buyer</string>
     <string name="MappingBuyerQRCode">Mapping Buyer QR Code</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

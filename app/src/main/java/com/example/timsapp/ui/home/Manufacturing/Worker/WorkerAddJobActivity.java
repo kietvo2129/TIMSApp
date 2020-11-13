@@ -5,17 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,7 +37,9 @@ import com.example.timsapp.R;
 import com.example.timsapp.ui.home.Composite.ItemStaffAdapter;
 import com.example.timsapp.ui.home.Composite.VitridungmayMaster;
 import com.example.timsapp.ui.home.Manufacturing.Composite.CompositeCheckEAActivity;
+import com.example.timsapp.ui.home.Manufacturing.Composite.CompositeCheckRollActivity;
 import com.example.timsapp.ui.home.Manufacturing.Composite.CompositeOqcActivity;
+import com.example.timsapp.ui.home.MappingOQC.MappingOQCActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -40,7 +49,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class WorkerAddJobActivity extends AppCompatActivity {
     private RecyclerView recyclerViewAddJob;
@@ -65,6 +78,9 @@ public class WorkerAddJobActivity extends AppCompatActivity {
     private String RollName;
     private String staff_id;
     private String QCCode;
+    private String Product;
+    private TextView tvid;
+    private String id_Scan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +92,8 @@ public class WorkerAddJobActivity extends AppCompatActivity {
         type = getIntent().getStringExtra("Type");
         RollName = getIntent().getStringExtra("RollName");
         QCCode = getIntent().getStringExtra("QCCode");
+//        intent.putExtra("Product",Product);
+        Product = getIntent().getStringExtra("Product");
 
 
         recyclerViewAddJob = findViewById(R.id.recyclerViewAddJob);
@@ -101,6 +119,7 @@ public class WorkerAddJobActivity extends AppCompatActivity {
         fabAddJob_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                id_Scan = "ADD";
                 scanWorker();
                 hidefab();
             }
@@ -225,7 +244,6 @@ public class WorkerAddJobActivity extends AppCompatActivity {
 //
 //    }
 
-
     private void inputData() {
         final Dialog dialog = new Dialog(WorkerAddJobActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         View dialogView = LayoutInflater.from(WorkerAddJobActivity.this).inflate(R.layout.popup_input, null);
@@ -273,9 +291,13 @@ public class WorkerAddJobActivity extends AppCompatActivity {
             if (result.getContents() == null) {
                 Toast.makeText(WorkerAddJobActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
-                findscanWorker(result.getContents());
+                if (id_Scan.equals("ADD")) {
+                    findscanWorker(result.getContents());
+                } else if (id_Scan.equals("WK")) {
+                    tvid.setText(result.getContents());
+                } else {
+                }
             }
-
         }
     }
 
@@ -283,14 +305,12 @@ public class WorkerAddJobActivity extends AppCompatActivity {
         ///TIMS/GetWorkers?page=1&rows=50&sidx=&sord=asc&_search=false&userId=&userName=&positionCode=
         //String url = BaseApp.isHostting() + "ActualWO/search_staff_pp?page=" + 1 + "&rows=50&sidx=&sord=asc&userid=" + contents +
         //        "&md_nm=&_search=false";
-
         // Call activity list worker
         Intent intent = new Intent(WorkerAddJobActivity.this, ListWorkerActivity.class);
         intent.putExtra("userId", contents);
         intent.putExtra("id_actual", id_actual);
         startActivity(intent);
         //finish();
-
 //        String url = BaseApp.isHostting() + "/TIMS/GetWorkers?page=1&rows=50&sidx=&sord=asc&_search=false&userId=&userName=&positionCode=";
 //        new findWorker().execute(url);
 //        Log.e("findscanWorker", url);
@@ -644,7 +664,7 @@ public class WorkerAddJobActivity extends AppCompatActivity {
 
     private void loadWordker(String id_actual) {
         String url = BaseApp.isHostting() +
-                "/TIMS/GetTIMSListStaff?page=1&rows=50&sidx=&sord=asc&_search=false&id_actual=" +
+                "/TIMS/GetTIMSListStaff?page=1&rows=100&sidx=&sord=asc&_search=false&id_actual=" +
                 id_actual;
         Log.d("loadWordker", url);
         progressDialog = new ProgressDialog(WorkerAddJobActivity.this);
@@ -714,12 +734,17 @@ public class WorkerAddJobActivity extends AppCompatActivity {
         adapterworker.setOnItemClickListener(new AdapterItemWorker.OnItemClickListener() {
             @Override
             public void onItemClick(int position, RecyclerView recyclerView) {
-//                if (recyclerView.getVisibility() == View.GONE) {
-//                    recyclerView.setVisibility(View.VISIBLE);
-//                    makeRecyclerDetail(position, recyclerView);
-//                } else {
-//                    recyclerView.setVisibility(View.GONE);
-//                }
+                if (recyclerView.getVisibility() == View.GONE) {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    makeRecyclerDetail(position, recyclerView);
+                } else {
+                    recyclerView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onEditClick(int position) {
+                openpopupmold(position);
             }
 
             @Override
@@ -735,16 +760,295 @@ public class WorkerAddJobActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 } else {
-                    Intent intent = new Intent(WorkerAddJobActivity.this, CompositeCheckEAActivity.class);
-                    intent.putExtra("Type", type);
-                    intent.putExtra("id_actual", id_actual);
-                    intent.putExtra("RollName", RollName);
-                    intent.putExtra("staff_id", listWorker.get(position).getStaff_id());
-                    intent.putExtra("QCCode", QCCode);
-                    startActivity(intent);
+                    if (RollName.equals("EA")) {
+                        Intent intent = new Intent(WorkerAddJobActivity.this, CompositeCheckEAActivity.class);
+                        intent.putExtra("Type", type);
+                        intent.putExtra("id_actual", id_actual);
+                        intent.putExtra("RollName", RollName);
+                        intent.putExtra("staff_id", listWorker.get(position).getStaff_id());
+                        intent.putExtra("QCCode", QCCode);
+                        startActivity(intent);
+                    } else if (RollName.equals("Roll")) {
+                        Intent intent = new Intent(WorkerAddJobActivity.this, CompositeCheckRollActivity.class);
+                        intent.putExtra("Type", type);
+                        intent.putExtra("id_actual", id_actual);
+                        intent.putExtra("RollName", RollName);
+                        intent.putExtra("staff_id", listWorker.get(position).getStaff_id());
+                        intent.putExtra("QCCode", QCCode);
+                        intent.putExtra("Product", Product);
+
+                        startActivity(intent);
+                    } else {
+
+                    }
                 }
             }
         });
+    }
+
+    //modify mc mold worker
+    private void modifyWorker(String url) {
+        Log.d("modifyWorker", url);
+        progressDialog = new ProgressDialog(WorkerAddJobActivity.this);
+        progressDialog.setMessage("Loading..."); // Setting Message
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.show(); // Display Progress Dialog
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("modifyWorker", response);
+                progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("result").equals("0")) {
+                        Toast.makeText(WorkerAddJobActivity.this, "Done", Toast.LENGTH_SHORT).show();
+                        startActivity(getIntent());
+                    } else if (jsonObject.getString("result").equals("1")) {
+                        AlerError.Baoloi("The Worker was setting duplicate date", WorkerAddJobActivity.this);
+                    } else if (jsonObject.getString("result").equals("2")) {
+                        AlerError.Baoloi("Start day was bigger End day. That is wrong", WorkerAddJobActivity.this);
+                    } else if (jsonObject.getString("result").equals("3")) {
+                        //   xacnhan_datontai(jsonObject.getString("update"),jsonObject.getString("start"),jsonObject.getString("end"));
+                    } else if (!jsonObject.getBoolean("result")) {
+                        AlerError.Baoloi(jsonObject.getString("message"), WorkerAddJobActivity.this);
+                    }
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    AlerError.Baoloi("The json error:" + e.toString(), WorkerAddJobActivity.this);
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+                AlerError.Baoloi("The server error:" + error.toString(), WorkerAddJobActivity.this);
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(WorkerAddJobActivity.this);
+        requestQueue.add(stringRequest);
+    }
+
+
+    private void openpopupmold(final int position) {
+        final Dialog dialog = new Dialog(WorkerAddJobActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+        View dialogView;
+
+        dialogView = LayoutInflater.from(WorkerAddJobActivity.this).inflate(R.layout.change_worker_a, null);
+        dialog.setCancelable(false);
+        dialog.setContentView(dialogView);
+
+//            StaffType = dialog.findViewById(R.id.StaffType);
+//            StaffType.setText(compositeMasterArrayList.get(position).staff_tp);
+//            dialog.findViewById(R.id.rll2).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    popup_Worker(StaffType);
+//                }
+//            });
+
+        final TextView ngaystart, giostart, Used;
+        ngaystart = dialog.findViewById(R.id.ngaystart);
+        giostart = dialog.findViewById(R.id.giostart);
+
+        final TextView ngayend, gioend;
+        ngayend = dialog.findViewById(R.id.ngayend);
+        gioend = dialog.findViewById(R.id.gioend);
+        Used = dialog.findViewById(R.id.Used);
+
+        tvid = dialog.findViewById(R.id.tvid);
+        tvid.setText(listWorker.get(position).getStaff_id());
+
+        if (listWorker.get(position).use_yn.equals("Y")) {
+            Used.setText("USE");
+        } else {
+            Used.setText("UNUSE");
+        }
+
+        dialog.findViewById(R.id.im1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                open_camera_scan();
+                id_Scan = "WK";
+                scanWorker(); // đỏi worker
+            }
+        });
+
+        dialog.findViewById(R.id.confirm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvid.getText().toString().length() != 0) {
+                    //so sanh 2 ngay duoc chon
+                    Date dsend = new Date();
+                    Date dstart = new Date();
+
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        dstart = sdf.parse(ngaystart.getText().toString() + " " + giostart.getText().toString());
+                        dsend = sdf.parse(ngayend.getText().toString() + " " + gioend.getText().toString());
+
+                    } catch (ParseException ex) {
+                        Log.e("rrr", ex.getMessage());
+                    }
+
+                    if (dsend.after(dstart)) {
+
+                        String us = Used.getText().toString();
+                        String keyus = "";
+                        if (us.equals("USE")) {
+                            keyus = "Y";
+                        } else {
+                            keyus = "N";
+                        }
+//http://messhinsungcntvina.com:83/TIMS/Modifyprocess_unitstaff?psid=186&staff_id=90221&use_yn=Y&start=2020-11-11+15%3A50%3A26&end=2020-11-11+20%3A00%3A00
+//{"result":0,"kq":{"psid":186,"staff_id":"90221","staff_tp":null,"staff_tp_nm":[],"uname":["Phạm Thị Hồng Nhung"],"start_dt":"2020-11-11 15:50:26","end_dt":"2020-11-11 20:00:00","use_yn":"Y"}}
+
+                        String url = BaseApp.isHostting() + "TIMS/Modifyprocess_unitstaff"
+                                + "?psid=" + listWorker.get(position).getPsid()
+                                + "&staff_id=" + /*listWorker.get(position).getStaff_id()*/ tvid.getText().toString()
+                                + "&use_yn=" + keyus
+                                + "&start=" +
+                                ngaystart.getText().toString() + " " + giostart.getText().toString() +
+                                "&end=" +
+                                ngayend.getText().toString() + " " + gioend.getText().toString();
+                        modifyWorker(url);
+                        Log.e("Modify", url);
+                    } else {
+                        AlerError.Baoloi("Start day was bigger End day. That is wrong", WorkerAddJobActivity.this);
+                    }
+                } else {
+                    tvid.setError("Please input here!");
+                }
+            }
+        });
+
+        dialog.findViewById(R.id.rl2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_pp_use(Used);
+            }
+        });
+
+        final String yy, MM, dd, hh, mm, ss, yye, MMe, dde, hhe, mme, sse;
+        String start_dt = listWorker.get(position).getStart_dt();
+        String end_dt = listWorker.get(position).getEnd_dt();
+
+        if (start_dt.length() == 19) {
+            yy = start_dt.substring(0, 4);
+            MM = start_dt.substring(5, 7);
+            dd = start_dt.substring(8, 10);
+            hh = start_dt.substring(11, 13);
+            mm = start_dt.substring(14, 16);
+            ss = start_dt.substring(17, 19);
+        } else {
+            AlerError.Baoloi("Format date incorrect.", WorkerAddJobActivity.this);
+            return;
+        }
+        if (end_dt.length() == 19) {
+            yye = end_dt.substring(0, 4);
+            MMe = end_dt.substring(5, 7);
+            dde = end_dt.substring(8, 10);
+            hhe = end_dt.substring(11, 13);
+            mme = end_dt.substring(14, 16);
+            sse = end_dt.substring(17, 19);
+        } else {
+            AlerError.Baoloi("Format date incorrect.", WorkerAddJobActivity.this);
+            return;
+        }
+        ngaystart.setText(yy + "-" + MM + "-" + dd);
+        ngayend.setText(yye + "-" + MMe + "-" + dde);
+        giostart.setText(hh + ":" + mm + ":" + ss);
+        gioend.setText(hhe + ":" + mme + ":" + sse);
+
+        ngaystart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogNgay(ngaystart);
+            }
+        });
+        giostart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialoggio(giostart, hh, mm);
+            }
+        });
+        ngayend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogNgay(ngayend);
+            }
+        });
+        gioend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialoggio(gioend, hhe, mme);
+            }
+        });
+
+        dialog.findViewById(R.id.btclose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void open_pp_use(final TextView used) {
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(WorkerAddJobActivity.this, android.R.layout.select_dialog_singlechoice);
+        android.app.AlertDialog.Builder builderSingle = new android.app.AlertDialog.Builder(WorkerAddJobActivity.this);
+        builderSingle.setTitle("Select One Line:");
+        arrayAdapter.add("USE");
+        arrayAdapter.add("UNUSE");
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                used.setText(arrayAdapter.getItem(i));
+                dialog.dismiss();
+            }
+        });
+        builderSingle.show();
+    }
+
+    private void dialogNgay(final TextView ngaystart) {
+        Calendar c = Calendar.getInstance();
+        int selectedYear = c.get(Calendar.YEAR);
+        int selectedMonth = c.get(Calendar.MONTH);
+        int selectedDayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year,
+                                  int monthOfYear, int dayOfMonth) {
+
+                ngaystart.setText((year + "-" + String.format("%02d", monthOfYear + 1)) + "-" + String.format("%02d", dayOfMonth));
+            }
+        };
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                dateSetListener, selectedYear, selectedMonth, selectedDayOfMonth);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
+
+    private void dialoggio(final TextView ngaystart, final String hh, final String mm) {
+        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                ngaystart.setText(String.format("%02d", hourOfDay) + ":" + (String.format("%02d", minute)) + ":00");
+            }
+        };
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, timeSetListener,
+                Integer.parseInt(hh), Integer.parseInt(mm), true);
+        timePickerDialog.show();
     }
 
     private void makeRecyclerDetail(int position, RecyclerView recyclerView) {
@@ -790,7 +1094,7 @@ public class WorkerAddJobActivity extends AppCompatActivity {
                                     object.getString("wmtid"),
                                     object.getString("mt_cd"),
                                     object.getString("bb_no"),
-                                    object.getString("real_qty"),
+                                    object.has("real_qty") ? object.getString("real_qty") : "0",
                                     object.getString("gr_qty")
                             ));
                         }
@@ -866,8 +1170,8 @@ public class WorkerAddJobActivity extends AppCompatActivity {
 
             vh.ml_d.setText(currentItem.getMt_cd());
             vh.bo_no.setText(currentItem.getBb_no());
-            vh.qty.setText(currentItem.getGr_qty());
-            vh.qty_r.setText(currentItem.getReal_qty());
+            vh.qty_r.setText(currentItem.getGr_qty());
+            vh.qty.setText(currentItem.getReal_qty());
         }
 
         @Override
@@ -991,7 +1295,8 @@ public class WorkerAddJobActivity extends AppCompatActivity {
             vh.actual.setText(currentItem.getActualQty());
             vh.defect.setText(currentItem.getDefective());
             vh.no.setText(i + 1 + "");
-
+            vh.tv_start_dt.setText(currentItem.getStart_dt());
+            vh.tv_end_dt.setText(currentItem.getEnd_dt());
         }
 
         @Override
@@ -1003,6 +1308,8 @@ public class WorkerAddJobActivity extends AppCompatActivity {
             void onItemClick(int position, RecyclerView recyclerView);
 
             void onButtonClick(int position);
+
+            void onEditClick(int position);
         }
 
         public void setOnItemClickListener(OnItemClickListener
@@ -1016,9 +1323,15 @@ public class WorkerAddJobActivity extends AppCompatActivity {
 
             public TextView item_vcd, product, defect, actual, no;
             RecyclerView re_de_add;
-
+            ImageView edit_wr;
+            TextView tv_start_dt, tv_end_dt;
             public WorkerViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
                 super(itemView);
+
+                tv_start_dt = itemView.findViewById(R.id.tv_start_dt);
+                tv_end_dt = itemView.findViewById(R.id.tv_end_dt);
+
+                edit_wr = itemView.findViewById(R.id.edit_wr);
                 btn_item_Composite = itemView.findViewById(R.id.btn_item_Composite);
                 item_vcd = itemView.findViewById(R.id.item_vcd);//name
                 product = itemView.findViewById(R.id.product);//id
@@ -1034,7 +1347,19 @@ public class WorkerAddJobActivity extends AppCompatActivity {
 //                tv_item_actual = itemView.findViewById(R.id.tv_item_actual);
 //                tv_item_defective = itemView.findViewById(R.id.tv_item_defective);
 //                btn_item_Composite = itemView.findViewById(R.id.btn_item_Composite);
-//
+
+                edit_wr.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null) {
+                            int position = getAdapterPosition();
+                            if (position != RecyclerView.NO_POSITION) {
+                                listener.onEditClick(position);
+                            }
+                        }
+                    }
+                });
+
                 btn_item_Composite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

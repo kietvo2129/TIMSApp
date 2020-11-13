@@ -49,7 +49,7 @@ import java.util.List;
 
 import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
-public class CheckEaActivity extends AppCompatActivity {
+public class CheckRollActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCHECK;
     TextView tv_qcheck_mlno, tv_qcheck_date, tv_qcheck_defectqty;
     EditText tv_qcheck_checkqty, tv_qcheck_okcheck;
@@ -68,14 +68,15 @@ public class CheckEaActivity extends AppCompatActivity {
     ArrayList<QCCheckDetailChildMaster> qcCheckDetailChildMasters;
     QCcheckDetailChildAdapter qCcheckDetailChildAdapter;
     RecyclerView recyclerViewchild;
-    private String MLNO,item_vcd,Qty;
+    private String MLNO, item_vcd, Qty;
     private String ML_LOT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_ea);
+        setContentView(R.layout.activity_check_roll);
         setTitle("QC Check");
+
         ML_LOT = getIntent().getStringExtra("ML_LOT");
         MLNO = getIntent().getStringExtra("MLNO");
         item_vcd = getIntent().getStringExtra("item_vcd");
@@ -89,13 +90,13 @@ public class CheckEaActivity extends AppCompatActivity {
         tv_qcheck_okcheck = findViewById(R.id.tv_qcheck_okcheck);
         tv_qcheck_defectqty = findViewById(R.id.tv_qcheck_defectqty);
 
-        dialog = new ProgressDialog(CheckEaActivity.this, R.style.AlertDialogCustom);
+        dialog = new ProgressDialog(this, R.style.AlertDialogCustom);
 
-        tv_qcheck_mlno.setText( MLNO  /*MappingOQCActivity.Ml_no*/);
-        tv_qcheck_date.setText( item_vcd /*ManufacturingActivity.qc_code*/);
+        tv_qcheck_mlno.setText(MLNO  /*MappingOQCActivity.Ml_no*/);
+        tv_qcheck_date.setText(item_vcd /*ManufacturingActivity.qc_code*/);
         tv_qcheck_checkqty.setText(Qty  /*numgr_qty + ""*/);
 
-        new CheckEaActivity.LoadCheckQc().execute(BaseApp.isHostting() + "ActualWO/Popup_Qc_Check_API?item_vcd=" + item_vcd);
+        new LoadCheckQc().execute(BaseApp.isHostting() + "ActualWO/Popup_Qc_Check_API?item_vcd=" + item_vcd);
         final int[] ck = {0};
         final int[] ok = {0};
         findViewById(R.id.header_p_2).setOnClickListener(new View.OnClickListener() {
@@ -172,6 +173,7 @@ public class CheckEaActivity extends AppCompatActivity {
                 }
                 adapterLess.notifyDataSetChanged();
 
+
                 if (tv_qcheck_checkqty.getText().length() > 0) {
                     ck[0] = Integer.parseInt(tv_qcheck_checkqty.getText().toString().trim());
                     if (Integer.parseInt(tv_qcheck_checkqty.getText().toString()) > Integer.parseInt(Qty)) {
@@ -212,12 +214,11 @@ public class CheckEaActivity extends AppCompatActivity {
     }
 
     private void pp_detail() {
-        filterDialog = new Dialog(CheckEaActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+        filterDialog = new Dialog(this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         filterDialog.setContentView(R.layout.popup_detail_qc_check);
         filterDialog.setCancelable(false);
-        filterDialog.getWindow().setLayout(getWidth(CheckEaActivity.this), ((getHight(CheckEaActivity.this) / 100) * 90));
+        filterDialog.getWindow().setLayout(getWidth(this), ((getHight(this) / 100) * 90));
         filterDialog.getWindow().setGravity(Gravity.BOTTOM);
-
 
         filterDialog.findViewById(R.id.btclose).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,13 +233,13 @@ public class CheckEaActivity extends AppCompatActivity {
         filterDialog.show();
 
     }
-//http://messhinsungcntvina.com:83/TIMS/Getfacline_qc?mt_cd=LJ63-18144A-KC20201112141242000001-MG1&mt_lot=LJ63-18144A-KC20201112141227000001&item_vcd=TI000001A&_search=false&nd=1605258869586&rows=50&page=1&sidx=&sord=asc
+
     private void getdatadetail() {
-        String url=  BaseApp.isHostting()  + "TIMS/Getfacline_qc?mt_cd="   +/* MappingOQCActivity.Ml_no*/ MLNO
-                +"&item_vcd="+ item_vcd /*ManufacturingActivity.qc_code*/
+        String url = BaseApp.isHostting() + "TIMS/Getfacline_qc?mt_cd="
+                +/* MappingOQCActivity.Ml_no*/ MLNO + "&item_vcd=" + item_vcd /*ManufacturingActivity.qc_code*/
                 +"&mt_lot="+ML_LOT;
-        new CheckEaActivity.getdatadetail().execute(url);
-        Log.e("QCCheckOQCDetail",url);
+        new getdatadetail().execute(url);
+        Log.e("QCCheckOQCDetail", url);
     }
 
     class getdatadetail extends AsyncTask<String, Integer, String> {
@@ -259,32 +260,32 @@ public class CheckEaActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             qcCheckdetailMasters = new ArrayList<>();
-            String fqno,fq_no,work_dt,check_qty,ok_qty,defect_qty;
+            String fqno, fq_no, work_dt, check_qty, ok_qty, defect_qty;
 
-            try{
+            try {
                 JSONArray jsonArray = new JSONArray(s);
 
-                if (jsonArray.length()==0){
+                if (jsonArray.length() == 0) {
                     dialog.dismiss();
-                    AlerError.Baoloi("No data", CheckEaActivity.this);
+                    AlerError.Baoloi("No data", CheckRollActivity.this);
                     return;
                 }
-                for (int i = 0 ;i<jsonArray.length();i++){
-                    JSONObject jsonObject=jsonArray.getJSONObject(i);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
                     fqno = jsonObject.getString("fqno");
                     fq_no = jsonObject.getString("fq_no");
                     work_dt = jsonObject.getString("work_dt");
                     check_qty = jsonObject.getString("check_qty");
                     ok_qty = jsonObject.getString("ok_qty");
                     defect_qty = jsonObject.getString("defect_qty");
-                    qcCheckdetailMasters.add(new QCCheckdetailMaster(fqno,fq_no,work_dt,check_qty,ok_qty,defect_qty));
+                    qcCheckdetailMasters.add(new QCCheckdetailMaster(fqno, fq_no, work_dt, check_qty, ok_qty, defect_qty));
                 }
                 builryc();
 
             } catch (JSONException e) {
                 e.printStackTrace();
                 dialog.dismiss();
-                AlerError.Baoloi("Could not connect to server", CheckEaActivity.this);
+                AlerError.Baoloi("Could not connect to server", CheckRollActivity.this);
             }
 
 
@@ -295,7 +296,7 @@ public class CheckEaActivity extends AppCompatActivity {
         dialog.dismiss();
         final LinearLayoutManager mLayoutManager;
         rycviewdetail.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(CheckEaActivity.this);
+        mLayoutManager = new LinearLayoutManager(CheckRollActivity.this);
         qCcheckDetailAdapter = new QCcheckDetailAdapter(qcCheckdetailMasters);
         rycviewdetail.setLayoutManager(mLayoutManager);
         rycviewdetail.setAdapter(qCcheckDetailAdapter);
@@ -310,9 +311,10 @@ public class CheckEaActivity extends AppCompatActivity {
     }
 
     private void getDetailChild(int position) {
-        new CheckEaActivity.getdatadetailChild().execute(BaseApp.isHostting()  + "TIMS/Getfacline_qc_value?pq_no=" + qcCheckdetailMasters.get(position).getFq_no());
-        Log.e("getdatadetailChild",BaseApp.isHostting()  + "TIMS/Getfacline_qc_value?pq_no=" + qcCheckdetailMasters.get(position).getFq_no());
+        new getdatadetailChild().execute(BaseApp.isHostting() + "TIMS/Getfacline_qc_value?pq_no=" + qcCheckdetailMasters.get(position).getFq_no());
+        Log.e("getdatadetailChild", BaseApp.isHostting() + "TIMS/Getfacline_qc_value?pq_no=" + qcCheckdetailMasters.get(position).getFq_no());
     }
+
     class getdatadetailChild extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -331,29 +333,29 @@ public class CheckEaActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             qcCheckDetailChildMasters = new ArrayList<>();
-            String fqhno,check_subject,check_value,check_qty;
-            try{
+            String fqhno, check_subject, check_value, check_qty;
+            try {
                 JSONArray jsonArray = new JSONArray(s);
 
-                if (jsonArray.length()==0){
+                if (jsonArray.length() == 0) {
                     dialog.dismiss();
-                    AlerError.Baoloi("No data", CheckEaActivity.this);
+                    AlerError.Baoloi("No data", CheckRollActivity.this);
                     return;
                 }
-                for (int i = 0 ;i<jsonArray.length();i++){
-                    JSONObject jsonObject=jsonArray.getJSONObject(i);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
                     fqhno = jsonObject.getString("pqhno");
                     check_subject = jsonObject.getString("check_subject");
                     check_value = jsonObject.getString("check_value");
                     check_qty = jsonObject.getString("check_qty");
-                    qcCheckDetailChildMasters.add(new QCCheckDetailChildMaster(fqhno,check_subject,check_value,check_qty));
+                    qcCheckDetailChildMasters.add(new QCCheckDetailChildMaster(fqhno, check_subject, check_value, check_qty));
                 }
                 builrycchild();
 
             } catch (JSONException e) {
                 e.printStackTrace();
                 dialog.dismiss();
-                AlerError.Baoloi("Could not connect to server", CheckEaActivity.this);
+                AlerError.Baoloi("Could not connect to server", CheckRollActivity.this);
             }
 
 
@@ -364,7 +366,7 @@ public class CheckEaActivity extends AppCompatActivity {
         dialog.dismiss();
         final LinearLayoutManager mLayoutManager;
         recyclerViewchild.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(CheckEaActivity.this);
+        mLayoutManager = new LinearLayoutManager(CheckRollActivity.this);
         qCcheckDetailChildAdapter = new QCcheckDetailChildAdapter(qcCheckDetailChildMasters);
         recyclerViewchild.setLayoutManager(mLayoutManager);
         recyclerViewchild.setAdapter(qCcheckDetailChildAdapter);
@@ -394,7 +396,7 @@ public class CheckEaActivity extends AppCompatActivity {
                 JSONObject object = new JSONObject(s);
                 if (object.getString("result").equals("false") || object.getString("result").equals("[]")) {
                     dialog.dismiss();
-                    Toast.makeText(CheckEaActivity.this, "No data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckRollActivity.this, "No data", Toast.LENGTH_SHORT).show();
                     rViewItemJSON.removeAll(rViewItemJSON);
                     tv_qcheck_checkqty.setEnabled(false);
                     tv_qcheck_checkqty.setInputType(InputType.TYPE_NULL);
@@ -405,7 +407,7 @@ public class CheckEaActivity extends AppCompatActivity {
                     return;
                 }
                 if (object.getString("result").equals("true") && object.getString("qc_itemcheck_mt").equals("[]")) {
-                    Toast.makeText(CheckEaActivity.this, "No data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckRollActivity.this, "No data", Toast.LENGTH_SHORT).show();
                     tv_qcheck_checkqty.setEnabled(false);
                     tv_qcheck_checkqty.setInputType(InputType.TYPE_NULL);
                     tv_qcheck_checkqty.setFocusable(false);
@@ -455,7 +457,7 @@ public class CheckEaActivity extends AppCompatActivity {
     private void buildQCMake() {
         dialog.dismiss();
         adapterLess = new QcCheckerLessAdaptor((ArrayList<QcCheckerLessItem>) rViewItemJSON);
-        recyclerViewCHECK.setLayoutManager(new LinearLayoutManager(CheckEaActivity.this));
+        recyclerViewCHECK.setLayoutManager(new LinearLayoutManager(CheckRollActivity.this));
         recyclerViewCHECK.setAdapter(adapterLess);
 
         adapterLess.setOnItemClickListener(new QcCheckerLessAdaptor.OnItemClickListener() {
@@ -489,7 +491,7 @@ public class CheckEaActivity extends AppCompatActivity {
                 }
                 if (valDefect <= Tong) {
                     AlertNotExist("Defect Qty max value: \"" + valDefect + "\"");
-                    // Toast.makeText(CheckEaActivity.this, "Defect qty max value: \"" + valDefect + "\"", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(CheckRollActivity.this, "Defect qty max value: \"" + valDefect + "\"", Toast.LENGTH_SHORT).show();
                     return;
 
                 } else {
@@ -525,11 +527,11 @@ public class CheckEaActivity extends AppCompatActivity {
 
     private void inputNumberDialog(final int posi) {
         Rect displayRectangle = new Rect();
-        Window window = CheckEaActivity.this.getWindow();
+        Window window = CheckRollActivity.this.getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(CheckEaActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(CheckRollActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
         builder.setTitle("Qty Value");
-        View dialogView = LayoutInflater.from(CheckEaActivity.this).inflate(R.layout.number_input_layout_ok_cancel, null);
+        View dialogView = LayoutInflater.from(CheckRollActivity.this).inflate(R.layout.number_input_layout_ok_cancel, null);
         dialogView.setMinimumWidth((int) (displayRectangle.width() * 1f));
         //dialogView.setMinimumHeight((int)(displayRectangle.height() * 1f));
 
@@ -633,7 +635,7 @@ public class CheckEaActivity extends AppCompatActivity {
             if (rViewItemJSON.get(i).isCheck()) {
                 ITEM_ICDNO_S = ITEM_ICDNO_S + "," + rViewItemJSON.get(i).getIcdno(); //qc_itemcheck_dt__icdno
                 ITEM_CHECK_ERR_S = ITEM_CHECK_ERR_S + "," + rViewItemJSON.get(i).getQty();// qty error input
-                tong+= Integer.parseInt(rViewItemJSON.get(i).getQty());
+                tong += Integer.parseInt(rViewItemJSON.get(i).getQty());
 
             }
         }
@@ -645,12 +647,13 @@ public class CheckEaActivity extends AppCompatActivity {
 
             if (tv_qcheck_defectqty.getText().toString().trim().equals("0")) {
 
-                String url= BaseApp.isHostting() +"TIMS/Insert_w_product_qc_APP?icdno=" + "" +
-                        "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
-                        + "&check_qty_error="+ "" +
-                        "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() +
-                        "&item_vcd="+item_vcd+ "&mt_cd="+ MLNO + "&mt_lot=" + ML_LOT;
-                new CheckEaActivity.saveQC().execute(url);
+                String url = BaseApp.isHostting() + "TIMS/Insert_w_product_qc_APP?icdno=" + "" +
+                        "&check_qty=" + tv_qcheck_checkqty.getText().toString().trim()
+                        + "&check_qty_error=" + "" +
+                        "&ok_qty=" + tv_qcheck_okcheck.getText().toString().trim() +
+                        "&item_vcd=" + item_vcd +
+                        "&mt_cd=" + MLNO + "&mt_lot=" + ML_LOT;
+                new saveQC().execute(url);
                 Log.e("saveQC", url);
 
             } else if (tv_qcheck_defectqty.getText().toString().trim().length() > 0 &&
@@ -666,7 +669,7 @@ public class CheckEaActivity extends AppCompatActivity {
                     }
 
                 }
-                if (Integer.parseInt(tv_qcheck_defectqty.getText().toString()) != tong){
+                if (Integer.parseInt(tv_qcheck_defectqty.getText().toString()) != tong) {
                     AlertNotExist("Please enter the total number of errors equal the amount of NG Qty.");
                     return;
                 }
@@ -676,13 +679,14 @@ public class CheckEaActivity extends AppCompatActivity {
                     ITEM_ICDNO_S = ITEM_ICDNO_S.substring(1, ITEM_ICDNO_S.length());
                     ITEM_CHECK_ERR_S = ITEM_CHECK_ERR_S.substring(1, ITEM_CHECK_ERR_S.length());
 
-                    String url=BaseApp.isHostting() +"TIMS/Insert_w_product_qc_APP?icdno=" + ITEM_ICDNO_S +
-                            "&check_qty="+ tv_qcheck_checkqty.getText().toString().trim()
-                            + "&check_qty_error="+ ITEM_CHECK_ERR_S +
-                            "&ok_qty="+ tv_qcheck_okcheck.getText().toString().trim() +
-                            "&item_vcd="+ item_vcd + "&mt_cd="+MLNO + "&mt_lot=" + ML_LOT;
+                    String url = BaseApp.isHostting() + "TIMS/Insert_w_product_qc_APP?icdno=" + ITEM_ICDNO_S +
+                            "&check_qty=" + tv_qcheck_checkqty.getText().toString().trim()
+                            + "&check_qty_error=" + ITEM_CHECK_ERR_S +
+                            "&ok_qty=" + tv_qcheck_okcheck.getText().toString().trim() +
+                            "&item_vcd=" + item_vcd +
+                            "&mt_cd=" + MLNO + "&mt_lot=" + ML_LOT;
 
-                    new CheckEaActivity.saveQC().execute(url);
+                    new saveQC().execute(url);
                     Log.e("saveQC", url);
 
                 } else {
@@ -694,6 +698,7 @@ public class CheckEaActivity extends AppCompatActivity {
         }
 
     }
+
     class saveQC extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -711,22 +716,22 @@ public class CheckEaActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            try{
+            try {
 
-                JSONObject jsonObject =new JSONObject(s);
-                if (!jsonObject.getBoolean("result")){
+                JSONObject jsonObject = new JSONObject(s);
+                if (!jsonObject.getBoolean("result")) {
                     dialog.dismiss();
-                    AlerError.Baoloi(jsonObject.getString("message"), CheckEaActivity.this);
-                }else {
+                    AlerError.Baoloi(jsonObject.getString("message"), CheckRollActivity.this);
+                } else {
                     dialog.dismiss();
-                    Toast.makeText(CheckEaActivity.this, "Check QC Done", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckRollActivity.this, "Check QC Done", Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
                 dialog.dismiss();
-                AlerError.Baoloi("Could not connect to server", CheckEaActivity.this);
+                AlerError.Baoloi("Could not connect to server", CheckRollActivity.this);
             }
         }
     }
@@ -743,6 +748,7 @@ public class CheckEaActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
+
     public static int getWidth(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowmanager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

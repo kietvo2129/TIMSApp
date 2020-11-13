@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/textcolorwhite">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.buyerqr.BuyerQrFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -100,18 +99,34 @@
                     android:layout_margin="4dp"
                     android:src="@drawable/qricon"
                     app:tint="#fff" />
+
+
+                <Button
+                    android:id="@+id/btn_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imex_buy"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:text="Mapping Buyer QR"
+                    android:textColor="#FFF"
+                    android:backgroundTint="#004D40"
+                     />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_status"
+            android:id="@+id/rv_buyer_qr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cr"
             android:layout_alignParentBottom="true"
             android:layout_marginVertical="4dp"
-            tools:listitem="@layout/item_fm_st" />
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp"
+            tools:listitem="@layout/item_buyer_qr" />
 
     </RelativeLayout>
+
 </FrameLayout>

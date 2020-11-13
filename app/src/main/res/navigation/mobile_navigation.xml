@@ -28,4 +28,16 @@
         android:name="com.example.timsapp.ui.status.StatusFragment"
         android:label="Status"
         tools:layout="@layout/fragment_status" />
+
+    <fragment
+        android:id="@+id/nav_buyqr"
+        android:name="com.example.timsapp.ui.buyerqr.BuyerQrFragment"
+        android:label="Buyer QR"
+        tools:layout="@layout/fragment_buyer_qr"/>
+
+    <fragment
+        android:id="@+id/nav_DownReason"
+        android:name="com.example.timsapp.ui.DownReason.DownReasonFragment"
+        android:label="Down Reason"
+        tools:layout="@layout/fragment_down_reason"/>
 </navigation>

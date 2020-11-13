@@ -78,6 +78,7 @@ public class ManufacturingActivity extends AppCompatActivity {
     private ArrayList<ItemProcess> listItemProcess;
     private ArrayList<ItemProcess> listItemRolls;
     private String pono = "";
+    private String Product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,8 @@ public class ManufacturingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_manufacturing);
         pono = getIntent().getStringExtra("PoNo");
+//        intent.putExtra("Product",actualWOMasterArrayList.get(position).getProduct());
+        Product = getIntent().getStringExtra("Product");
 
         setTitle(pono != null ? pono : "Manufactory");
 
@@ -534,6 +537,8 @@ public class ManufacturingActivity extends AppCompatActivity {
                 intent.putExtra("Type",actualWOMasterArrayList.get(pos).getName());
                 intent.putExtra("RollName",actualWOMasterArrayList.get(pos).getRollName());
                 intent.putExtra("QCCode",actualWOMasterArrayList.get(pos).getQCCode());
+                intent.putExtra("Product",Product);
+
                 startActivity(intent);
 
                 im_delete.setOnClickListener(new View.OnClickListener() {

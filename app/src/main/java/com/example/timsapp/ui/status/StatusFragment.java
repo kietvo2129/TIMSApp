@@ -40,19 +40,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class StatusFragment extends Fragment {
-    private String ID_MLNO = "";
-    private TextView tv_qe;
-    private ImageView imex;
+    public static final String IDBUYED = "IDBUYED";
+    public static final String IDBOBBIN = "IDBOBBIN";
 
+    private TextView tv_qe, tv_qe_buy;
+    private ImageView imex, imex_buy;
     ProgressDialog progressDialog;
-    private ArrayList<ListStatus> listStatus = new ArrayList<>();
+    private ArrayList<ListStatus> listStatus;
     private ListStatusAdaptor adaptor;
     private RecyclerView rv_status;
+    private String idKey;
+    private ArrayList<ListStatus> listBStatus;
+    private ListBStatusAdaptor adaptorB;
 
     public StatusFragment() {
         // Required empty public constructor
     }
+    ///Tims/Get_Status_Bobin?bb_no=BOBBIN-006
 
+    ///Tims/Get_Status_Buyer?buyerCode=hunghehe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,16 +71,33 @@ public class StatusFragment extends Fragment {
         tv_qe = view.findViewById(R.id.tv_qe);
         imex = view.findViewById(R.id.imex);
         rv_status = view.findViewById(R.id.rv_status);
+        tv_qe_buy = view.findViewById(R.id.tv_qe_buy);
+        imex_buy = view.findViewById(R.id.imex_buy);
+
+        tv_qe_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputText(IDBUYED);
+            }
+        });
+        imex_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                idKey = IDBUYED;
+                startQRScanner();
+            }
+        });
 
         tv_qe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputText(tv_qe);
+                inputText(IDBOBBIN);
             }
         });
         imex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                idKey = IDBOBBIN;
                 startQRScanner();
             }
         });
@@ -96,12 +119,8 @@ public class StatusFragment extends Fragment {
                 Log.d("LoadMaterialInformation", response);
                 //LJ63-17969BSTA20201019105417000001
                 progressDialog.dismiss();
+                listStatus = new ArrayList<>();
                 try {
-                    //{"result": false,"message": "Data has not exist, Please Scan Again!!!"}
-                    //{"result": true,"message": "Success","Data": [
-                    // {"gr_qty": 1500,"mt_type": "CMT","recevice_dt_tims": "20201020","mt_sts_nm": "Using","lct_nm": "TIMS"},
-                    // {"gr_qty": 0,"mt_type": "CMT","recevice_dt_tims": null,"mt_sts_nm": "Defect","lct_nm": "TIMS"},
-                    // {"gr_qty": 1000,"mt_type": "CMT","recevice_dt_tims": null,"mt_sts_nm": "Used/Sent","lct_nm": "Sản xuất 1"}]}
 
                     JSONObject object = new JSONObject(response);
                     if (object.getBoolean("result")) {
@@ -115,10 +134,17 @@ public class StatusFragment extends Fragment {
                                 listStatus.add(new ListStatus(
                                         bibon,
                                         jsonObject.getString("gr_qty"),
+                                        jsonObject.getString("gr_qty_bf"),
+                                        jsonObject.getString("process"),
                                         jsonObject.getString("mt_type"),
-                                        jsonObject.getString("recevice_dt_tims").replace("null", ""),
+                                        jsonObject.getString("recevice_dt_tims"),
                                         jsonObject.getString("mt_sts_nm"),
-                                        jsonObject.getString("lct_nm")
+                                        jsonObject.getString("lct_nm"),
+                                        jsonObject.getString("mt_cd"),
+                                        jsonObject.getString("po"),
+                                        jsonObject.getString("product"),
+                                        jsonObject.getString("staff_id"),
+                                        jsonObject.getString("staff_nm")
                                 ));
                             }
                             Toast.makeText(getActivity(), object.getString("message"), Toast.LENGTH_SHORT).show();
@@ -166,21 +192,26 @@ public class StatusFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ListStatusAdaptor.ListStatusViewHolder viewHolder, int i) {
+        public void onBindViewHolder(@NonNull ListStatusAdaptor.ListStatusViewHolder vh, int i) {
             ListStatus currentItem = items.get(i);
-
-            viewHolder.tv_bb_no_fs.setText(currentItem.getBibon());
-            viewHolder.tv_qty_dt.setText(currentItem.getGr_qty());
-            viewHolder.tv_st_st.setText(currentItem.getMt_sts_nm());
-            viewHolder.tv_dep_st.setText(currentItem.getLct_nm());
-            viewHolder.tv_mt_st.setText(currentItem.getMt_type());
-
-            viewHolder.tv_dt_st.setText(currentItem.getRecdate().length() == 8
-                    ? currentItem.getRecdate().substring(0, 4) + "-"
-                    + currentItem.getRecdate().substring(4, 6) + "-"
-                    + currentItem.getRecdate().substring(6, 8)
-                    : currentItem.getRecdate());
-            viewHolder.tv_stt_st.setText(String.valueOf(i+1));
+            vh.v_rec_dt.setText(currentItem.getRecevice_dt_tims().length() == 8
+                    ? currentItem.getRecevice_dt_tims().substring(0, 4) + "-"
+                    + currentItem.getRecevice_dt_tims().substring(4, 6) + "-"
+                    + currentItem.getRecevice_dt_tims().substring(6, 8)
+                    : currentItem.getRecevice_dt_tims());
+            vh.v_stt.setText(String.valueOf(i + 1));
+            vh.v_bobbin_no.setText(currentItem.getBibon());
+            vh.v_qty.setText(currentItem.getGr_qty());
+            vh.v_qty_bf.setText(currentItem.getGr_qty_bf());
+            vh.v_mt_cd.setText(currentItem.getMt_cd());
+            vh.v_product.setText(currentItem.getProduct());
+            vh.v_po_no.setText(currentItem.getPo());
+            vh.v_process.setText(currentItem.getProcess());
+            vh.v_type.setText(currentItem.getMt_type());
+            vh.v_lct_nm.setText(currentItem.getLct_nm());
+            vh.v_rec_dt.setText(currentItem.getLct_nm());
+            vh.v_staff_id.setText(currentItem.getStaff_id());
+            vh.v_staff_nm.setText(currentItem.getStaff_nm());
         }
 
         @Override
@@ -197,17 +228,28 @@ public class StatusFragment extends Fragment {
         }
 
         public static class ListStatusViewHolder extends RecyclerView.ViewHolder {
-            public TextView tv_bb_no_fs, tv_qty_dt, tv_st_st, tv_dep_st, tv_mt_st, tv_dt_st, tv_stt_st;
+            public TextView v_stt, v_bobbin_no;
+            public TextView v_qty, v_qty_bf;
+            public TextView v_mt_cd, v_product, v_po_no, v_process, v_type, v_lct_nm;
+            public TextView v_rec_dt, v_staff_id, v_staff_nm;
+
 
             public ListStatusViewHolder(@NonNull View itemView, final ListStatusAdaptor.OnItemClickListener listener) {
                 super(itemView);
-                tv_bb_no_fs = itemView.findViewById(R.id.tv_bb_no_fs);
-                tv_qty_dt = itemView.findViewById(R.id.tv_qty_dt);
-                tv_st_st = itemView.findViewById(R.id.tv_st_st);
-                tv_dep_st = itemView.findViewById(R.id.tv_dep_st);
-                tv_mt_st = itemView.findViewById(R.id.tv_mt_st);
-                tv_dt_st = itemView.findViewById(R.id.tv_dt_st);
-                tv_stt_st = itemView.findViewById(R.id.tv_stt_st);
+
+                v_stt = itemView.findViewById(R.id.v_stt);
+                v_bobbin_no = itemView.findViewById(R.id.v_bobbin_no);
+                v_qty = itemView.findViewById(R.id.v_qty);
+                v_qty_bf = itemView.findViewById(R.id.v_qty_bf);
+                v_mt_cd = itemView.findViewById(R.id.v_mt_cd);
+                v_product = itemView.findViewById(R.id.v_product);
+                v_po_no = itemView.findViewById(R.id.v_po_no);
+                v_process = itemView.findViewById(R.id.v_process);
+                v_type = itemView.findViewById(R.id.v_type);
+                v_lct_nm = itemView.findViewById(R.id.v_lct_nm);
+                v_rec_dt = itemView.findViewById(R.id.v_rec_dt);
+                v_staff_id = itemView.findViewById(R.id.v_staff_id);
+                v_staff_nm = itemView.findViewById(R.id.v_staff_nm);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -229,12 +271,169 @@ public class StatusFragment extends Fragment {
     }
 
     private void sendData(String conText) {
-        ID_MLNO = conText;
         String url = BaseApp.isHostting() + "/Tims/Get_Status_Bobin?bb_no=" + conText;
         loadJson(url, conText);
     }
 
-    private void inputText(final TextView TextID) {
+    //
+    private void loadJsonBuy(String url, final String bibon) {
+        Log.d("loadJsonBuy", url);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading..."); // Setting Message
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.show(); // Display Progress Dialog
+        //progressDialog.setCancelable(false);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("loadJsonBuy", response);
+                //LJ63-17969BSTA20201019105417000001
+                progressDialog.dismiss();
+                listBStatus = new ArrayList<>();
+                try {
+
+                    JSONObject object = new JSONObject(response);
+                    if (object.getBoolean("result")) {
+                        JSONArray jsonArray = object.getJSONArray("Data");
+                        if (jsonArray.length() == 0) {
+                            AlerError.Baoloi(object.getString("message"), getActivity());
+                        } else {
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                listBStatus.add(new ListStatus(
+                                        bibon,
+                                        jsonObject.getString("gr_qty"),
+                                        jsonObject.getString("gr_qty_bf"),
+                                        ("process"),
+                                        ("mt_type"),
+                                        ("recevice_dt_tims"),
+                                        jsonObject.getString("mt_sts_nm"),
+                                        ("lct_nm"),
+                                        ("mt_cd"),
+                                        jsonObject.getString("po"),
+                                        jsonObject.getString("product"),
+                                        ("staff_id"),
+                                        ("staff_nm")
+                                ));
+                            }
+                            Toast.makeText(getActivity(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                            builBRecyclerView();
+                        }
+                    } else {
+                        AlerError.Baoloi(object.getString("message"), getActivity());
+                    }
+                } catch (JSONException e) {
+                    progressDialog.dismiss();
+                    AlerError.Baoloi("The json error:" + e.toString(), getActivity());
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                progressDialog.dismiss();
+                AlerError.Baoloi("The server error:" + error.toString(), getActivity());
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+
+    private void builBRecyclerView() {
+        adaptorB = new ListBStatusAdaptor(listBStatus);
+        rv_status.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv_status.setHasFixedSize(true);
+        rv_status.setAdapter(adaptorB);
+    }
+
+    public static class ListBStatusAdaptor extends RecyclerView.Adapter<ListBStatusAdaptor.ListBStatusViewHolder> {
+        private ArrayList<ListStatus> items;
+        private OnItemClickListener mListener;
+
+        @NonNull
+        @Override
+        public ListBStatusAdaptor.ListBStatusViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_buy_sd,
+                    viewGroup, false);
+            ListBStatusAdaptor.ListBStatusViewHolder evh = new ListBStatusAdaptor.ListBStatusViewHolder(v, mListener);
+            return evh;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ListBStatusAdaptor.ListBStatusViewHolder vh, int i) {
+            ListStatus currentItem = items.get(i);
+
+            vh.v_stt.setText(String.valueOf(i + 1));
+            vh.v_bobbin_no.setText(currentItem.getBibon());
+
+            vh.v_qty.setText(currentItem.getGr_qty());
+            vh.v_qty_bf.setText(currentItem.getGr_qty_bf());
+
+            vh.v_product.setText(currentItem.getProduct());
+            vh.v_po_no.setText(currentItem.getPo());
+            vh.v_sts_nm.setText(currentItem.getProcess());
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
+
+        public interface OnItemClickListener {
+            void onItemClick(int position);
+        }
+
+        public void setOnItemClickListener(OnItemClickListener listener) {
+            mListener = listener;
+        }
+
+        public static class ListBStatusViewHolder extends RecyclerView.ViewHolder {
+            public TextView v_stt, v_bobbin_no;
+            public TextView v_qty, v_qty_bf;
+            public TextView  v_product, v_po_no,  v_sts_nm;
+
+            public ListBStatusViewHolder(@NonNull View itemView, final ListBStatusAdaptor.OnItemClickListener listener) {
+                super(itemView);
+
+                v_stt = itemView.findViewById(R.id.v_stt);
+                v_bobbin_no = itemView.findViewById(R.id.v_bobbin_no);
+                v_qty = itemView.findViewById(R.id.v_qty);
+                v_qty_bf = itemView.findViewById(R.id.v_qty_bf);
+                v_product = itemView.findViewById(R.id.v_product);
+                v_po_no = itemView.findViewById(R.id.v_po_no);
+
+                v_sts_nm = itemView.findViewById(R.id.v_sts_nm);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null) {
+                            int position = getAdapterPosition();
+                            if (position != RecyclerView.NO_POSITION) {
+                                listener.onItemClick(position);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        public ListBStatusAdaptor(ArrayList<ListStatus> waitItem) {
+            items = waitItem;
+        }
+    }
+
+    private void sendDatabuy(String conText) {
+        String url = BaseApp.isHostting() + "/Tims/Get_Status_Buyer?buyerCode=" + conText;
+        loadJsonBuy(url, conText);
+    }
+
+    //
+    private void inputText(final String sid) {
         //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AlertDialogCustom));
         builder.setTitle("Qr Code");
@@ -247,9 +446,14 @@ public class StatusFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 String QrScan = input.getText().toString().trim();
-                TextID.setText(QrScan);
                 if (QrScan.length() > 0) {
-                    sendData(QrScan);
+                    if (sid.equals(IDBUYED)) {
+                        tv_qe_buy.setText(QrScan);
+                        sendDatabuy(QrScan);
+                    } else {
+                        tv_qe.setText(QrScan);
+                        sendData(QrScan);
+                    }
                 } else {
                     Toast.makeText(getActivity(), "Please insert QR code", Toast.LENGTH_SHORT).show();
                 }
@@ -278,75 +482,94 @@ public class StatusFragment extends Fragment {
                 Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_LONG).show();
             } else {
                 String QrScan = result.getContents().trim();
-                tv_qe.setText(QrScan);
+
                 if (QrScan.length() > 0) {
-                    sendData(QrScan);// scan
+                    if(idKey.equals(IDBUYED)) {
+                        tv_qe_buy.setText(QrScan);
+                        sendDatabuy(QrScan);// scan
+                    } else {
+                        tv_qe.setText(QrScan);
+                        sendData(QrScan);// scan
+                    }
                 } else {
                     Toast.makeText(getActivity(), "Please insert QR code", Toast.LENGTH_SHORT).show();
                 }
             }
-
         }
     }
 
     private class ListStatus {
-        String bibon, gr_qty, mt_type, recdate, mt_sts_nm, lct_nm;
+        String bibon, gr_qty, gr_qty_bf, process, mt_type, recevice_dt_tims, mt_sts_nm,
+                lct_nm, mt_cd, po, product, staff_id, staff_nm;
 
-        public ListStatus(String bibon, String gr_qty, String mt_type, String recdate, String mt_sts_nm, String lct_nm) {
+        public ListStatus(String bibon, String gr_qty, String gr_qty_bf, String process, String mt_type,
+                          String recevice_dt_tims, String mt_sts_nm, String lct_nm, String mt_cd,
+                          String po, String product, String staff_id, String staff_nm) {
             this.bibon = bibon;
             this.gr_qty = gr_qty;
+            this.gr_qty_bf = gr_qty_bf;
+            this.process = process;
             this.mt_type = mt_type;
-            this.recdate = recdate;
+            this.recevice_dt_tims = recevice_dt_tims;
             this.mt_sts_nm = mt_sts_nm;
             this.lct_nm = lct_nm;
+            this.mt_cd = mt_cd;
+            this.po = po;
+            this.product = product;
+            this.staff_id = staff_id;
+            this.staff_nm = staff_nm;
         }
 
         public String getBibon() {
             return bibon;
         }
 
-        public void setBibon(String bibon) {
-            this.bibon = bibon;
-        }
-
         public String getGr_qty() {
             return gr_qty;
         }
 
-        public void setGr_qty(String gr_qty) {
-            this.gr_qty = gr_qty;
+        public String getGr_qty_bf() {
+            return gr_qty_bf;
+        }
+
+        public String getProcess() {
+            return process;
         }
 
         public String getMt_type() {
             return mt_type;
         }
 
-        public void setMt_type(String mt_type) {
-            this.mt_type = mt_type;
-        }
-
-        public String getRecdate() {
-            return recdate;
-        }
-
-        public void setRecdate(String recdate) {
-            this.recdate = recdate;
+        public String getRecevice_dt_tims() {
+            return recevice_dt_tims;
         }
 
         public String getMt_sts_nm() {
             return mt_sts_nm;
         }
 
-        public void setMt_sts_nm(String mt_sts_nm) {
-            this.mt_sts_nm = mt_sts_nm;
-        }
-
         public String getLct_nm() {
             return lct_nm;
         }
 
-        public void setLct_nm(String lct_nm) {
-            this.lct_nm = lct_nm;
+        public String getMt_cd() {
+            return mt_cd;
+        }
+
+        public String getPo() {
+            return po;
+        }
+
+        public String getProduct() {
+            return product;
+        }
+
+        public String getStaff_id() {
+            return staff_id;
+        }
+
+        public String getStaff_nm() {
+            return staff_nm;
         }
     }
 }

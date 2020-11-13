@@ -20,20 +20,20 @@
             android:background="@color/color1">
 
             <TextView
-                android:id="@+id/tv_bb_no_fs"
+                android:id="@+id/v_bobbin_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/tv_stt_st"
+                android:layout_toStartOf="@+id/v_stt"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
-                android:text="DL154354"
+                android:text="BoBBINO-001"
                 android:textColor="@android:color/holo_red_dark"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_stt_st"
+                android:id="@+id/v_stt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -45,7 +45,7 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rl_row2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,19 +53,27 @@
             android:background="@color/color2">
 
             <RelativeLayout
-                android:id="@+id/rl_row2_0"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/rl_row2_1"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:paddingHorizontal="8dp">
+                android:layout_weight="3"
+                android:gravity="center">
 
                 <TextView
-                    android:id="@+id/tv_qty_dt"
+                    android:id="@+id/lb_q"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="Quantity"
+                    android:textColor="#918E8E"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/v_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lb_q"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:padding="4dp"
@@ -74,125 +82,259 @@
                     android:textColor="#fff"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/lb_qb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/v_qty"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="quantity of previous process"
+                    android:textColor="#918E8E"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/v_qty_bf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lb_qb"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="4110"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_row2_1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/rl_row2_0">
+                android:layout_weight="7"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/lb_st_st"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:padding="4dp"
-                    android:text="Status"
-                    android:textColor="#fff"
-                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_st_st"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/lb_st_st"
-                    android:padding="4dp"
-                    android:text="xuất hàng ngay 21/10"
-                    android:textColor="#fff"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="ML No"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
 
-                <TextView
-                    android:id="@+id/lb_dep_st"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_st_st"
-                    android:layout_alignParentStart="true"
-                    android:padding="4dp"
-                    android:text="Departure"
-                    android:textColor="#fff"
-                    android:textStyle="italic" />
+                    <TextView
+                        android:id="@+id/v_mt_cd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="LJ63-19534ASTA20201105173222000001-DV1"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_dep_st"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_st_st"
-                    android:layout_toEndOf="@+id/lb_dep_st"
-                    android:padding="4dp"
-                    android:text="CMT"
-                    android:textColor="#fff"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/lb_mt_st"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_dep_st"
-                    android:layout_alignParentStart="true"
-                    android:padding="4dp"
-                    android:text="Type"
-                    android:textColor="#fff"
-                    android:textStyle="italic" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Product"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
 
-                <TextView
-                    android:id="@+id/tv_mt_st"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_dep_st"
-                    android:layout_toEndOf="@+id/lb_mt_st"
-                    android:padding="4dp"
-                    android:text="CMT"
-                    android:textColor="#fff"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/v_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="LJ63-19534A"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="PO NO"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/v_po_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="PO000000008"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Process"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/v_process"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Máy dập"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Type"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/v_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="CMT"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Location"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/v_lct_nm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="TIMS"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rl_row3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_row2"
-            android:background="@color/color3">
+            android:background="@color/color3"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/lb_dt_st"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Recevice Date"
-                android:textColor="#fff"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/tv_dt_st"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/lb_dt_st"
-                android:padding="4dp"
-                android:text="2200-11-11"
-                android:textColor="#fff"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_row3">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_chi_fg"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:visibility="gone"
-                tools:listitem="@layout/item_chili" />
-        </RelativeLayout>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="Recevice Date"
+                    android:textColor="#fff"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/v_rec_dt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/lb_dt_st"
+                    android:padding="4dp"
+                    android:text="2200-11-11"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="Staff Id"
+                    android:textColor="#fff"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/v_staff_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/lb_dt_st"
+                    android:padding="4dp"
+                    android:text="70009 , 80029"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="Name"
+                    android:textColor="#fff"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/v_staff_nm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/lb_dt_st"
+                    android:padding="4dp"
+                    android:text="Nguyễn Thị Trang , Lê Đức Dũng"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

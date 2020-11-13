@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_row1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color1">
+
+            <TextView
+                android:id="@+id/v_bobbin_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/v_stt"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="BoBBINO-001"
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/v_stt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:padding="4dp"
+                android:text="1"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_row2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_row1"
+            android:background="@color/color2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Product"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/v_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="LJ63-19534A"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="PO NO"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/v_po_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="PO000000008"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Status"
+                        android:textColor="#918E8E"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/v_sts_nm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Waiting for Stock"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_row2"
+            android:background="@color/color3">
+
+            <RelativeLayout
+                android:layout_marginStart="8dp"
+                android:id="@+id/rl_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/lb_q"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="Quantity"
+                    android:textColor="#918E8E"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/v_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lb_q"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="2500"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@+id/rl_ok"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/lb_qb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="quantity of previous process"
+                    android:textColor="#918E8E"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/v_qty_bf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lb_qb"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="4110"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
