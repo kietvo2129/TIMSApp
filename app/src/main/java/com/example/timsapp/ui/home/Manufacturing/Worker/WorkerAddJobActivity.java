@@ -81,13 +81,14 @@ public class WorkerAddJobActivity extends AppCompatActivity {
     private String Product;
     private TextView tvid;
     private String id_Scan;
+    private String pono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_add_job);
-        setTitle("Worker");
 
+        pono = getIntent().getStringExtra("pono");
         id_actual = getIntent().getStringExtra("id_actual");
         type = getIntent().getStringExtra("Type");
         RollName = getIntent().getStringExtra("RollName");
@@ -95,7 +96,7 @@ public class WorkerAddJobActivity extends AppCompatActivity {
 //        intent.putExtra("Product",Product);
         Product = getIntent().getStringExtra("Product");
 
-
+        setTitle(pono +" " + type);
         recyclerViewAddJob = findViewById(R.id.recyclerViewAddJob);
         fabAddJob = findViewById(R.id.fabAddJob);
         fabAddJob_input = findViewById(R.id.fabAddJob_input);

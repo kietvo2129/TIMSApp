@@ -54,7 +54,9 @@ import java.util.Map;
 import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 public class CompositeCheckEAActivity extends AppCompatActivity {
+    private static final String ID_ADDNG = "ID_ADDNG";
 
+    private static final String ID_MG = "ID_MG";
     private TextView nodata;
     private RecyclerView recyclerViewOqc;
     private FloatingActionButton fab_add, fab_in, fab_can;
@@ -207,7 +209,7 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
                         creatingMLno(Containercode.getText().toString()); // input
                     } else if (key == K_edit) {
                         ChangeBobbin(Containercode.getText().toString());
-                    } else if(key == K_Divi) {
+                    } else if (key == K_Divi) {
                         addDivive(Containercode.getText().toString());
                     } else {
 
@@ -325,8 +327,14 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
                     creatingMLno(result.getContents()); //scan
                 } else if (keyscan == K_edit) {
                     ChangeBobbin(result.getContents());
-                } else if(keyscan == K_Divi) {
+                } else if (keyscan == K_Divi) {
                     addDivive(result.getContents());
+                } else if (keyscan == ID_MG) {
+                    tv_con_t.setText(result.getContents());
+                    searchmergi();
+                } else if (keyscan == ID_ADDNG) {
+                    tv_mlno.setText(result.getContents());
+                    search();
                 } else {
 
                 }
@@ -573,7 +581,8 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
 
-                maLot =  listCheckQC.get(position).getMt_cd();
+                maLot = listCheckQC.get(position).getMt_cd();
+                myPosiion = position;
                 popDetai(position);
             }
 
@@ -585,11 +594,13 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
 
             @Override
             public void onAddNGClick(int position) {
+                myPosiion = position;
                 popAddNG(position);
             }
 
             @Override
             public void onMergeClick(int position) {
+                myPosiion = position;
                 popMerge(position);
             }
 
@@ -676,7 +687,7 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
         fab_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                        editDevide();
+                editDevide();
 
             }
         });
@@ -684,11 +695,11 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
         btn_divi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(tv_qty_s.getText().toString().length()>0 ) {
-                    if(Integer.parseInt(tv_qty_s.getText().toString() )>0) {
+                if (tv_qty_s.getText().toString().length() > 0) {
+                    if (Integer.parseInt(tv_qty_s.getText().toString()) > 0) {
                         saveDivide(listCheckQC.get(position).getBb_no(), alertDialog);
                     } else {
-                        AlerError.Baoloi("Quantity is '0'." , CompositeCheckEAActivity.this);
+                        AlerError.Baoloi("Quantity is '0'.", CompositeCheckEAActivity.this);
                     }
                 }
             }
@@ -742,7 +753,7 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean("result")) {
                         Toast.makeText(CompositeCheckEAActivity.this, "Done", Toast.LENGTH_SHORT).show();
-                        searchJsonDivide(urlsearchJsonDivide) ;
+                        searchJsonDivide(urlsearchJsonDivide);
                         return;
                     } else {
                         AlerError.Baoloi("error: " + jsonObject.getString("message"), CompositeCheckEAActivity.this);
@@ -1006,6 +1017,13 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
         Button btn_save = dialogView.findViewById(R.id.btn_save);
         nodatap = dialogView.findViewById(R.id.nodatap);
         search();
+        ImageView img_scan_ng = dialogView.findViewById(R.id.img_scan_ng);
+        img_scan_ng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scanBobbin(ID_ADDNG);
+            }
+        });
 
         btn_searh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1049,7 +1067,13 @@ public class CompositeCheckEAActivity extends AppCompatActivity {
         tv_con_t = dialogView.findViewById(R.id.tv_con_t);
         tv_mlno_m = dialogView.findViewById(R.id.tv_mlno_m);
         tv_mtno_m = dialogView.findViewById(R.id.tv_mtno_m);
-
+        ImageView img_scan_me = dialogView.findViewById(R.id.img_scan_me);
+        img_scan_me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scanBobbin(ID_MG); /// merge
+            }
+        });
         Button btn_searh = dialogView.findViewById(R.id.btn_searh);
         qty_m_a = dialogView.findViewById(R.id.qty_m_a);
         Button btn_save = dialogView.findViewById(R.id.btn_save);

@@ -77,7 +77,7 @@ public class ManufacturingActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapterProcess , adapterRolls;
     private ArrayList<ItemProcess> listItemProcess;
     private ArrayList<ItemProcess> listItemRolls;
-    private String pono = "";
+    private String pono;
     private String Product;
 
     @Override
@@ -533,6 +533,7 @@ public class ManufacturingActivity extends AppCompatActivity {
 
                 // Goi activity Worker Add Job
                 Intent intent = new Intent(ManufacturingActivity.this, WorkerAddJobActivity.class);
+                intent.putExtra("pono",pono);
                 intent.putExtra("id_actual",actualWOMasterArrayList.get(pos).getId());
                 intent.putExtra("Type",actualWOMasterArrayList.get(pos).getName());
                 intent.putExtra("RollName",actualWOMasterArrayList.get(pos).getRollName());

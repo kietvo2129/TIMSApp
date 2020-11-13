@@ -345,6 +345,12 @@ public class Receive_Fragment extends Fragment {
                 //listRecTims = new ArrayList<ListRecTims>();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
+                    if(!jsonObject.getBoolean("result")){
+                        progressDialog.dismiss();
+                        AlerError.Baoloi(jsonObject.has("message")?jsonObject.getString("message"):"Data has not exist!!!", getActivity());
+                        return;
+                    }
+
                     JSONArray jsonArray = jsonObject.getJSONArray("Data");
 
                     if (jsonArray.length() == 0) {
@@ -424,11 +430,14 @@ public class Receive_Fragment extends Fragment {
             public void onResponse(String response) {
                 Log.d("loadJsonList", response);
                 listRecTims = new ArrayList<ListRecTims>();
+                progressDialog.dismiss();
                 try {
+                    progressDialog.dismiss();
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
 
                     if (jsonArray.length() == 0) {
+                        progressDialog.dismiss();
                         AlerError.Baoloi("Data don't have!!!", getActivity());
                     } else {
 

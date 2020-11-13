@@ -56,6 +56,7 @@ import static com.example.timsapp.Url.NoiDung_Tu_URL;
 
 public class CompositeCheckRollActivity extends AppCompatActivity {
     private static final String ID_ADDNG = "ID_ADDNG";
+    private static final String ID_MG = "ID_MG";
     private TextView nodata;
     private RecyclerView recyclerViewOqc;
     private FloatingActionButton fab_add, fab_in, fab_can;
@@ -222,8 +223,14 @@ public class CompositeCheckRollActivity extends AppCompatActivity {
                 }
                 if (keyscan == K_Mapping) {
                     addMapping(result.getContents());
-                } else if(keyscan == ID_ADDNG){
+                } else if (keyscan == ID_ADDNG) {
                     tv_mlno.setText(result.getContents());
+                    searchAddNG();
+                } else if (keyscan == ID_MG) {
+                    tv_con_t.setText(result.getContents());
+                    searchmergi();
+                } else {
+
                 }
             }
         }
@@ -308,21 +315,25 @@ public class CompositeCheckRollActivity extends AppCompatActivity {
         adapterOqc.setOnItemClickListener(new AdapterItemOQC.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                myPosiion = position;
                 popDetai(position);
             }
 
             @Override
             public void onAddNGClick(int position) {
+                myPosiion = position;
                 popAddNG(position);
             }
 
             @Override
             public void onMergeClick(int position) {
+                myPosiion = position;
                 popMerge(position);
             }
 
             @Override
             public void onDeleteClick(final int position) {
+                myPosiion = position;
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(CompositeCheckRollActivity.this, R.style.AlertDialogCustom);
                 alertDialog.setCancelable(false);
                 alertDialog.setTitle("Warning!!!");
@@ -347,7 +358,6 @@ public class CompositeCheckRollActivity extends AppCompatActivity {
 //                Toast.makeText(CompositeCheckRollActivity.this, "sss" + position, Toast.LENGTH_SHORT).show();
 
                 myPosiion = position;
-
                 scanBobbin(K_Mapping); // Mapping
             }
 
@@ -1125,6 +1135,7 @@ public class CompositeCheckRollActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(CompositeCheckRollActivity.this);
         requestQueue.add(stringRequest);
     }
+
     private void caclDetail(int posi) {
 
         String url = BaseApp.isHostting() + "/TIMS/Cancel_mapping?wmmid=" + listDetail.get(posi).getWmtid();
@@ -1375,6 +1386,13 @@ public class CompositeCheckRollActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
+            }
+        });
+        ImageView imageView = dialogView.findViewById(R.id.img_scan_me);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scanBobbin(ID_MG);
             }
         });
 

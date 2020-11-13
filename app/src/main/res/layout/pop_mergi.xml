@@ -68,12 +68,13 @@
                         android:layout_alignParentStart="true"
                         android:orientation="vertical">
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/lla"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Container"
@@ -84,10 +85,24 @@
                                 style="@style/textwhite"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_below="@+id/lla"
+                                android:layout_marginTop="-3dp"
+                                android:layout_toStartOf="@+id/img_scan_me"
                                 android:background="@drawable/selector_edittext"
                                 android:inputType="textEmailAddress"
                                 android:padding="8dp" />
-                        </LinearLayout>
+
+                            <ImageView
+                                android:padding="2dp"
+                                android:layout_margin="2dp"
+                                android:background="@drawable/box_view_layout_nen"
+                                android:id="@+id/img_scan_me"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignBottom="@+id/tv_con_t"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_scan_qr"/>
+                        </RelativeLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
